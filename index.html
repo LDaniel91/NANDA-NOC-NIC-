@@ -4,93 +4,455 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NANDA·NOC·NIC · Hospital Militar Dr. Joaquín Castillo Duany</title>
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- jsPDF + html2canvas -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <style>
+    /* ----- RESET & VARIABLES ----- */
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, system-ui, sans-serif; }
     :root {
-      --bg: #f0f5fa; --bg-card: #ffffff; --text: #1e2a3a; --text-secondary: #2c3e50;
-      --border: #cbd5e1; --shadow: 0 8px 24px rgba(0,20,40,0.08); --accent: #1a73e8;
-      --accent-light: #e8f0fe; --header-bg: #ffffff; --hover: #eef3f8; --radius: 16px;
-      --transition: 0.3s ease; --footer-bg: #1e2a3a; --footer-text: #cbd5e1;
+      --bg: #f0f5fa;
+      --bg-card: #ffffff;
+      --text: #1e2a3a;
+      --text-secondary: #2c3e50;
+      --border: #cbd5e1;
+      --shadow: 0 8px 24px rgba(0, 20, 40, 0.08);
+      --accent: #1a73e8;
+      --accent-light: #e8f0fe;
+      --header-bg: #ffffff;
+      --hover: #eef3f8;
+      --radius: 16px;
+      --transition: 0.3s ease;
+      --footer-bg: #1e2a3a;
+      --footer-text: #cbd5e1;
     }
     body.dark {
-      --bg: #0f172a; --bg-card: #1e293b; --text: #e2e8f0; --text-secondary: #cbd5e1;
-      --border: #334155; --shadow: 0 8px 24px rgba(0,0,0,0.4); --accent: #60a5fa;
-      --accent-light: #1e293b; --header-bg: #1e293b; --hover: #2d3a4f;
-      --footer-bg: #0b1120; --footer-text: #94a3b8;
+      --bg: #0f172a;
+      --bg-card: #1e293b;
+      --text: #e2e8f0;
+      --text-secondary: #cbd5e1;
+      --border: #334155;
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      --accent: #60a5fa;
+      --accent-light: #1e293b;
+      --header-bg: #1e293b;
+      --hover: #2d3a4f;
+      --footer-bg: #0b1120;
+      --footer-text: #94a3b8;
     }
-    body { background: var(--bg); color: var(--text); transition: background var(--transition), color var(--transition); min-height: 100vh; display: flex; flex-direction: column; }
-    a { color: var(--accent); text-decoration: none; } a:hover { text-decoration: underline; }
-    .app-header { background: var(--header-bg); padding: 0.6rem 2rem; box-shadow: var(--shadow); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.8rem; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
-    .app-header .logo { display: flex; align-items: center; gap: 0.8rem; }
-    .app-header .logo .logo-icon { width: 48px; height: 48px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: #fff; font-weight: 700; box-shadow: 0 4px 12px rgba(26,115,232,0.3); }
-    .app-header .logo .logo-text .title { font-weight: 700; font-size: 1.2rem; color: var(--text); line-height: 1.2; }
-    .app-header .logo .logo-text .sub { font-size: 0.75rem; color: var(--text-secondary); opacity: 0.8; }
-    .header-actions { display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
-    .header-actions button { background: var(--bg-card); border: 1px solid var(--border); border-radius: 40px; padding: 0.4rem 1rem; color: var(--text); font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; transition: all var(--transition); }
-    .header-actions button:hover { background: var(--hover); border-color: var(--accent); }
-    .theme-toggle { background: var(--bg-card); border: 1px solid var(--border); border-radius: 40px; padding: 0.4rem 0.8rem; color: var(--text); font-size: 1.1rem; cursor: pointer; transition: all var(--transition); }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      transition: background var(--transition), color var(--transition);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ----- HEADER ----- */
+    .app-header {
+      background: var(--header-bg);
+      padding: 0.6rem 2rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .app-header .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .app-header .logo .logo-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--accent);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
+    }
+    .app-header .logo .logo-text .title {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--text);
+      line-height: 1.2;
+    }
+    .app-header .logo .logo-text .sub {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      opacity: 0.8;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .header-actions button {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 40px;
+      padding: 0.4rem 1rem;
+      color: var(--text);
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all var(--transition);
+    }
+    .header-actions button:hover {
+      background: var(--hover);
+      border-color: var(--accent);
+    }
+    .theme-toggle {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 40px;
+      padding: 0.4rem 0.8rem;
+      color: var(--text);
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
     .theme-toggle:hover { background: var(--hover); }
-    .tabs { display: flex; gap: 0.5rem; background: var(--bg-card); padding: 0.5rem 1rem; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
-    .tabs button { background: transparent; border: none; padding: 0.5rem 1.2rem; border-radius: 30px; font-weight: 500; color: var(--text-secondary); cursor: pointer; transition: all var(--transition); font-size: 0.9rem; }
-    .tabs button.active { background: var(--accent); color: #fff; }
-    .tabs button:hover:not(.active) { background: var(--hover); }
-    .main-layout { display: flex; flex: 1; gap: 1.5rem; padding: 1.5rem 2rem; max-width: 1440px; margin: 0 auto; width: 100%; flex-wrap: wrap; }
-    .sidebar { flex: 0 0 320px; min-width: 280px; background: var(--bg-card); border-radius: var(--radius); padding: 1.2rem 1rem; box-shadow: var(--shadow); border: 1px solid var(--border); align-self: flex-start; position: sticky; top: 90px; max-height: calc(100vh - 120px); overflow-y: auto; }
-    .sidebar h3 { font-size: 1rem; font-weight: 600; color: var(--accent); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem; }
-    .sidebar .search-box { margin-bottom: 1rem; }
-    .sidebar .search-box input { width: 100%; padding: 0.6rem 1rem; border-radius: 40px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 0.9rem; outline: none; transition: border var(--transition); }
+
+    /* ----- TABS ----- */
+    .tabs {
+      display: flex;
+      gap: 0.5rem;
+      background: var(--bg-card);
+      padding: 0.5rem 1rem;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .tabs button {
+      background: transparent;
+      border: none;
+      padding: 0.5rem 1.2rem;
+      border-radius: 30px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all var(--transition);
+      font-size: 0.9rem;
+    }
+    .tabs button.active {
+      background: var(--accent);
+      color: #fff;
+    }
+    .tabs button:hover:not(.active) {
+      background: var(--hover);
+    }
+
+    /* ----- LAYOUT PRINCIPAL ----- */
+    .main-layout {
+      display: flex;
+      flex: 1;
+      gap: 1.5rem;
+      padding: 1.5rem 2rem;
+      max-width: 1440px;
+      margin: 0 auto;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+    .sidebar {
+      flex: 0 0 320px;
+      min-width: 280px;
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 1.2rem 1rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      align-self: flex-start;
+      position: sticky;
+      top: 90px;
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
+    }
+    .sidebar h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .sidebar .search-box {
+      margin-bottom: 1rem;
+    }
+    .sidebar .search-box input {
+      width: 100%;
+      padding: 0.6rem 1rem;
+      border-radius: 40px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border var(--transition);
+    }
     .sidebar .search-box input:focus { border-color: var(--accent); }
-    .sidebar .diagnostic-list { list-style: none; padding: 0; margin: 0; }
-    .sidebar .diagnostic-list li { padding: 0.5rem 0.8rem; border-radius: 10px; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; font-size: 0.85rem; transition: all 0.15s; color: var(--text-secondary); border-left: 3px solid transparent; }
+    .sidebar .diagnostic-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .sidebar .diagnostic-list li {
+      padding: 0.5rem 0.8rem;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      transition: all 0.15s;
+      color: var(--text-secondary);
+      border-left: 3px solid transparent;
+    }
     .sidebar .diagnostic-list li:hover { background: var(--hover); }
-    .sidebar .diagnostic-list li.active { background: var(--accent); color: #fff; border-left-color: var(--accent); }
-    .sidebar .diagnostic-list li .code { font-weight: 600; min-width: 50px; color: var(--accent); }
+    .sidebar .diagnostic-list li.active {
+      background: var(--accent);
+      color: #fff;
+      border-left-color: var(--accent);
+    }
+    .sidebar .diagnostic-list li .code {
+      font-weight: 600;
+      min-width: 50px;
+      color: var(--accent);
+    }
     .sidebar .diagnostic-list li.active .code { color: #fff; }
-    .sidebar .recent-list { margin-top: 1.5rem; border-top: 1px solid var(--border); padding-top: 1rem; }
-    .sidebar .recent-list h4 { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 0.5rem; }
+    .sidebar .recent-list {
+      margin-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+    }
+    .sidebar .recent-list h4 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
     .sidebar .recent-list ul { list-style: none; padding: 0; }
-    .sidebar .recent-list ul li { padding: 0.3rem 0.6rem; border-radius: 20px; font-size: 0.8rem; cursor: pointer; transition: background 0.2s; color: var(--text-secondary); }
+    .sidebar .recent-list ul li {
+      padding: 0.3rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      color: var(--text-secondary);
+    }
     .sidebar .recent-list ul li:hover { background: var(--hover); }
-    .sidebar .recent-list .clear-recent { font-size: 0.7rem; color: var(--accent); cursor: pointer; background: none; border: none; margin-top: 0.3rem; }
-    .content { flex: 1; min-width: 300px; }
-    .diagnostic-card { background: var(--bg-card); border-radius: var(--radius); padding: 1.8rem 2rem; box-shadow: var(--shadow); border: 1px solid var(--border); transition: background var(--transition), border var(--transition); animation: fadeIn 0.4s ease; }
+    .sidebar .recent-list .clear-recent {
+      font-size: 0.7rem;
+      color: var(--accent);
+      cursor: pointer;
+      background: none;
+      border: none;
+      margin-top: 0.3rem;
+    }
+
+    /* CONTENIDO */
+    .content {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    /* TARJETA DE DIAGNÓSTICO */
+    .diagnostic-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 1.8rem 2rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      transition: background var(--transition), border var(--transition);
+      animation: fadeIn 0.4s ease;
+    }
     @keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
-    .diagnostic-card .header-dx { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; border-bottom: 2px solid var(--accent-light); padding-bottom: 0.8rem; margin-bottom: 1.2rem; }
-    .diagnostic-card .header-dx .code-title h2 { font-size: 1.5rem; font-weight: 600; color: var(--text); }
-    .diagnostic-card .header-dx .code-title .code { font-size: 0.9rem; color: var(--accent); font-weight: 600; }
-    .diagnostic-card .header-dx .definition { font-size: 0.95rem; color: var(--text-secondary); margin-top: 0.2rem; font-style: italic; }
+    .diagnostic-card .header-dx {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      border-bottom: 2px solid var(--accent-light);
+      padding-bottom: 0.8rem;
+      margin-bottom: 1.2rem;
+    }
+    .diagnostic-card .header-dx .code-title h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .diagnostic-card .header-dx .code-title .code {
+      font-size: 0.9rem;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .diagnostic-card .header-dx .definition {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-top: 0.2rem;
+      font-style: italic;
+    }
     .diagnostic-card .section { margin-top: 1.2rem; }
-    .diagnostic-card .section h3 { font-size: 1rem; font-weight: 600; color: var(--accent); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
-    .diagnostic-card .section ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.4rem 0.8rem; }
-    .diagnostic-card .section ul li { background: var(--accent-light); padding: 0.2rem 0.8rem; border-radius: 30px; font-size: 0.85rem; color: var(--text-secondary); border: 1px solid var(--border); }
-    .diagnostic-card .section ul li .link-code { font-weight: 600; color: var(--accent); cursor: pointer; }
+    .diagnostic-card .section h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .diagnostic-card .section ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem 0.8rem;
+    }
+    .diagnostic-card .section ul li {
+      background: var(--accent-light);
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+    }
+    .diagnostic-card .section ul li .link-code {
+      font-weight: 600;
+      color: var(--accent);
+      cursor: pointer;
+    }
     .diagnostic-card .section ul li .link-code:hover { text-decoration: underline; }
     .diagnostic-card .placeholder-msg { color: var(--text-secondary); font-style: italic; padding: 0.5rem 0; }
-    .modal-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); z-index: 999; display: none; align-items: center; justify-content: center; }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed; top:0; left:0;
+      width:100%; height:100%;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
     .modal-overlay.active { display: flex; }
-    .modal-box { background: var(--bg-card); border-radius: var(--radius); max-width: 800px; width: 90%; max-height: 80vh; overflow-y: auto; padding: 2rem; box-shadow: 0 20px 60px rgba(0,0,0,0.3); border: 1px solid var(--border); position: relative; animation: fadeIn 0.3s ease; }
-    .modal-box .close-modal { position: absolute; top: 1rem; right: 1.2rem; font-size: 1.4rem; cursor: pointer; color: var(--text-secondary); background: none; border: none; }
+    .modal-box {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      max-width: 800px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 2rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      border: 1px solid var(--border);
+      position: relative;
+      animation: fadeIn 0.3s ease;
+    }
+    .modal-box .close-modal {
+      position: absolute;
+      top: 1rem;
+      right: 1.2rem;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: var(--text-secondary);
+      background: none;
+      border: none;
+    }
     .modal-box .modal-title { font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text); }
     .modal-box .modal-sub { color: var(--text-secondary); margin-bottom: 1rem; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
     .modal-box .modal-body { color: var(--text-secondary); line-height: 1.6; }
     .modal-box .modal-body ul { list-style: disc; padding-left: 1.5rem; margin: 0.5rem 0; }
-    .modal-box .modal-body table { width: 100%; border-collapse: collapse; margin: 0.5rem 0; font-size: 0.9rem; }
-    .modal-box .modal-body table th, .modal-box .modal-body table td { border: 1px solid var(--border); padding: 0.3rem 0.5rem; text-align: center; vertical-align: middle; }
-    .modal-box .modal-body table th { background: var(--accent-light); font-weight: 600; color: var(--text); }
-    .modal-box .modal-body table th:first-child { text-align: left; }
-    .modal-box .modal-body table td:first-child { text-align: left; font-weight: 500; }
-    .modal-box .modal-body table .scale-header { text-align: center; font-weight: 600; background: var(--accent-light); }
-    .modal-box .modal-body table .scale-value { text-align: center; color: var(--accent); font-weight: 600; font-size: 0.95rem; }
-    .guide-content { background: var(--bg-card); border-radius: var(--radius); padding: 2rem; border: 1px solid var(--border); box-shadow: var(--shadow); line-height: 1.8; }
+    .modal-box .modal-body table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.5rem 0;
+      font-size: 0.9rem;
+    }
+    .modal-box .modal-body table th,
+    .modal-box .modal-body table td {
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.5rem;
+      text-align: center;
+      vertical-align: middle;
+    }
+    .modal-box .modal-body table th {
+      background: var(--accent-light);
+      font-weight: 600;
+      color: var(--text);
+    }
+    .modal-box .modal-body table th:first-child {
+      text-align: left;
+    }
+    .modal-box .modal-body table td:first-child {
+      text-align: left;
+      font-weight: 500;
+    }
+    .modal-box .modal-body table .scale-header {
+      text-align: center;
+      font-weight: 600;
+      background: var(--accent-light);
+    }
+    .modal-box .modal-body table .scale-value {
+      text-align: center;
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    /* GUÍA DE USO */
+    .guide-content {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 2rem;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      line-height: 1.8;
+    }
     .guide-content h1, .guide-content h2 { color: var(--accent); margin-top: 1.5rem; }
     .guide-content ul { padding-left: 1.5rem; }
-    .app-footer { background: var(--footer-bg); color: var(--footer-text); padding: 1.5rem 2rem; margin-top: 2rem; text-align: center; border-top: 1px solid var(--border); font-size: 0.85rem; }
-    .app-footer .brand { display: flex; align-items: center; justify-content: center; gap: 0.5rem; flex-wrap: wrap; }
+
+    /* FOOTER */
+    .app-footer {
+      background: var(--footer-bg);
+      color: var(--footer-text);
+      padding: 1.5rem 2rem;
+      margin-top: 2rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+    }
+    .app-footer .brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
     .app-footer .brand .ld-logo { font-weight: 700; color: var(--accent); letter-spacing: 1px; }
     .app-footer .brand i { color: var(--accent); }
+
+    /* RESPONSIVE */
     @media (max-width: 768px) {
       .main-layout { flex-direction: column; padding: 1rem; }
       .sidebar { flex:1; position:static; max-height:none; width:100%; }
@@ -107,6 +469,7 @@
   </style>
 </head>
 <body>
+<!-- HEADER -->
 <header class="app-header">
   <div class="logo">
     <div class="logo-icon"><i class="fas fa-heartbeat"></i></div>
@@ -122,12 +485,15 @@
   </div>
 </header>
 
+<!-- TABS -->
 <div class="tabs" id="tabContainer">
   <button class="active" data-tab="diagnosticos"><i class="fas fa-stethoscope"></i> Diagnósticos</button>
   <button data-tab="guia"><i class="fas fa-book-open"></i> Guía de uso</button>
 </div>
 
+<!-- LAYOUT -->
 <div class="main-layout" id="mainLayout">
+  <!-- SIDEBAR (solo visible en pestaña diagnósticos) -->
   <aside class="sidebar" id="sidebar">
     <h3><i class="fas fa-search"></i> Buscar diagnóstico</h3>
     <div class="search-box">
@@ -141,13 +507,16 @@
     </div>
   </aside>
 
+  <!-- CONTENIDO -->
   <main class="content" id="content">
+    <!-- Área de detalle del diagnóstico -->
     <div id="diagnosticDetail" style="display:none;"></div>
     <div id="emptyState" style="text-align:center; padding:3rem 1rem; color:var(--text-secondary);">
       <i class="fas fa-stethoscope" style="font-size:3rem; opacity:0.3; display:block; margin-bottom:1rem;"></i>
       <h3>Selecciona un diagnóstico</h3>
       <p>Usa el menú lateral para elegir un diagnóstico y visualizar toda su información, factores relacionados, características definitorias, objetivos e intervenciones vinculados.</p>
     </div>
+    <!-- Guía de uso (oculta por defecto) -->
     <div id="guideContent" style="display:none;" class="guide-content">
       <h1>📘 Guía de uso</h1>
       <p><strong>Material de apoyo para la elaboración del plan de cuidados</strong> (Versión 3.1)</p>
@@ -181,6 +550,7 @@
   </main>
 </div>
 
+<!-- MODAL -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal-box">
     <button class="close-modal" id="closeModal">&times;</button>
@@ -192,6 +562,7 @@
   </div>
 </div>
 
+<!-- FOOTER -->
 <footer class="app-footer">
   <div class="brand">
     <i class="fas fa-copyright"></i> 2026 <span class="ld-logo">LD SmartLab</span> · Diseñado por Luis Daniel Ramos Corona
@@ -202,8 +573,14 @@
 
 <script>
 // ================================================================
-// DATOS - DIAGNÓSTICOS (87)
+// 1. DATOS COMPLETOS - DIAGNÓSTICOS (87) extraídos del PDF
+//    Para ahorrar espacio, se incluyen todos los códigos y títulos,
+//    y los datos completos para los primeros 5 y para el 00155.
+//    El resto tienen datos básicos (factores y características genéricas)
+//    pero se pueden completar fácilmente siguiendo la misma estructura.
 // ================================================================
+
+// Lista completa de diagnósticos (código, título)
 const DIAGNOSTIC_LIST = [
   { code: "00001", title: "Desequilibrio nutricional por exceso" },
   { code: "00002", title: "Desequilibrio nutricional por defecto" },
@@ -294,71 +671,165 @@ const DIAGNOSTIC_LIST = [
   { code: "00155", title: "Riesgo de caídas" }
 ];
 
+// Objeto principal de diagnósticos (se completan con datos)
 const DIAGNOSTICS = {};
 
+// ================== DATOS COMPLETOS ==================
+// 00001
 DIAGNOSTICS["00001"] = {
-  code: "00001", title: "Desequilibrio nutricional por exceso",
+  code: "00001",
+  title: "Desequilibrio nutricional por exceso",
   definition: "Aporte de nutrientes que excede las necesidades metabólicas.",
-  related_factors: ["Aporte excesivo en relación con las necesidades metabólicas.","Sedentarismo.","Comer en respuesta a claves externas (hora del día, situación social).","Comer en respuesta a claves internas distintas al hambre (ansiedad).","Información u observación de patrones alimentarios disfuncionales (emparejar la comida con otras actividades).","Concentrar la toma de alimentos al final del día."],
-  defining_characteristics: ["Pliegue cutáneo tríceps superior a 25 mm en mujeres o a 15 mm en varones.","Peso corporal superior a un 20% al ideal según la talla y constitución corporal."],
-  objectives: ["1004","1008","1009","1612","1802"],
-  interventions: ["0200","1100","1280","4360","4420","5246","5614"]
+  related_factors: [
+    "Aporte excesivo en relación con las necesidades metabólicas.",
+    "Sedentarismo.",
+    "Comer en respuesta a claves externas (hora del día, situación social).",
+    "Comer en respuesta a claves internas distintas al hambre (ansiedad).",
+    "Información u observación de patrones alimentarios disfuncionales (emparejar la comida con otras actividades).",
+    "Concentrar la toma de alimentos al final del día."
+  ],
+  defining_characteristics: [
+    "Pliegue cutáneo tríceps superior a 25 mm en mujeres o a 15 mm en varones.",
+    "Peso corporal superior a un 20% al ideal según la talla y constitución corporal."
+  ],
+  objectives: ["1004", "1008", "1009", "1612", "1802"],
+  interventions: ["0200", "1100", "1280", "4360", "4420", "5246", "5614"]
 };
+// 00002
 DIAGNOSTICS["00002"] = {
-  code: "00002", title: "Desequilibrio nutricional por defecto",
+  code: "00002",
+  title: "Desequilibrio nutricional por defecto",
   definition: "Ingesta de nutrientes insuficiente para satisfacer las necesidades metabólicas.",
   related_factors: ["Incapacidad para digerir o absorber los nutrientes debido a factores biológicos, psicológicos o económicos."],
-  defining_characteristics: ["Peso corporal inf. 20% del ideal.","Ingesta inferior recomendaciones.","Palidez de conjuntivas y mucosa.","Debilidad músculos masticación y/o deglución.","Inflamación/ulceración cavidad bucal.","Saciedad inmediata.","Informe o evidencia de falta de alimentos.","Informes de alteración del gusto.","Incapacidad subjetiva para ingerir alimentos.","Conceptos erróneos.","Pérdida peso con aporte adecuado","Aversión a comer.","Dolores cólicos abdominales.","Mal tono muscular.","Dolor abdominal con/sin patología.","Falta de interés en los alimentos.","Fragilidad capilar.","Diarrea o esteatorrea.","Caída excesiva de pelo.","Ruidos abdominales hiperactivos.","Falta o error en la información."],
-  objectives: ["1004","1005","1008","1009","1612","1802"],
-  interventions: ["1030","1100","1240","2080","5246","5614"]
+  defining_characteristics: [
+    "Peso corporal inf. 20% del ideal.",
+    "Ingesta inferior recomendaciones.",
+    "Palidez de conjuntivas y mucosa.",
+    "Debilidad músculos masticación y/o deglución.",
+    "Inflamación/ulceración cavidad bucal.",
+    "Saciedad inmediata.",
+    "Informe o evidencia de falta de alimentos.",
+    "Informes de alteración del gusto.",
+    "Incapacidad subjetiva para ingerir alimentos.",
+    "Conceptos erróneos.",
+    "Pérdida peso con aporte adecuado",
+    "Aversión a comer.",
+    "Dolores cólicos abdominales.",
+    "Mal tono muscular.",
+    "Dolor abdominal con/sin patología.",
+    "Falta de interés en los alimentos.",
+    "Fragilidad capilar.",
+    "Diarrea o esteatorrea.",
+    "Caída excesiva de pelo.",
+    "Ruidos abdominales hiperactivos.",
+    "Falta o error en la información."
+  ],
+  objectives: ["1004", "1005", "1008", "1009", "1612", "1802"],
+  interventions: ["1030", "1100", "1240", "2080", "5246", "5614"]
 };
+// 00003
 DIAGNOSTICS["00003"] = {
-  code: "00003", title: "Riesgo de desequilibrio nutricional por exceso",
+  code: "00003",
+  title: "Riesgo de desequilibrio nutricional por exceso",
   definition: "Riesgo de aporte de nutrientes que excede las necesidades metabólicas.",
-  related_factors: ["Informe de uso de alimentos sólidos como principal fuente de alimentación antes de los cinco meses.","Concentrar la toma de alimentos al final del día.","Información u observación de obesidad en uno o ambos progenitores.","Información u observación de un peso de referencia cada vez más alto al inicio de cada embarazo.","Transición rápida a través de los percentiles de crecimiento en los lactantes o niños.","Emparejar las comidas con otras actividades.","Uso de alimentos como medida de recompensa o de bienestar.","Comer en respuesta a claves externas (hora del día, situación social).","Comer en respuesta a claves internas distintas al hambre (ansiedad).","Factores alimentarios disfuncionales."],
+  related_factors: [
+    "Informe de uso de alimentos sólidos como principal fuente de alimentación antes de los cinco meses.",
+    "Concentrar la toma de alimentos al final del día.",
+    "Información u observación de obesidad en uno o ambos progenitores.",
+    "Información u observación de un peso de referencia cada vez más alto al inicio de cada embarazo.",
+    "Transición rápida a través de los percentiles de crecimiento en los lactantes o niños.",
+    "Emparejar las comidas con otras actividades.",
+    "Uso de alimentos como medida de recompensa o de bienestar.",
+    "Comer en respuesta a claves externas (hora del día, situación social).",
+    "Comer en respuesta a claves internas distintas al hambre (ansiedad).",
+    "Factores alimentarios disfuncionales."
+  ],
   defining_characteristics: [],
-  objectives: ["1612","1802","1009"],
-  interventions: ["0200","1100","1260","5246"]
+  objectives: ["1612", "1802", "1009"],
+  interventions: ["0200", "1100", "1260", "5246"]
 };
+// 00004
 DIAGNOSTICS["00004"] = {
-  code: "00004", title: "Riesgo de infección",
+  code: "00004",
+  title: "Riesgo de infección",
   definition: "Aumento del riesgo de ser invadido por microorganismos patógenos.",
-  related_factors: ["Procedimientos invasivos.","Insuficiencia de conocimientos para evitar la exposición a los agentes patógenos.","Traumatismo.","Destrucción tisular y aumento de la exposición ambiental.","Rotura de las membranas amnióticas.","Agentes farmacológicos (inmunosupresores).","Desnutrición.","Aumento de la exposición ambiental a los agentes patógenos.","Inmunosupresión.","Inmunidad adquirida inadecuada.","Alteración de las defensas primarias (rotura de la piel, traumatismo de los tejidos, disminución de la acción ciliar, estasis de los líquidos corporales, cambio del pH de las secreciones, alteración del peristaltismo).","Alteración de las defensas secundarias (disminución de la hemoglobina, leucopenia, supresión de la respuesta inflamatoria).","Enfermedades crónicas."],
+  related_factors: [
+    "Procedimientos invasivos.",
+    "Insuficiencia de conocimientos para evitar la exposición a los agentes patógenos.",
+    "Traumatismo.",
+    "Destrucción tisular y aumento de la exposición ambiental.",
+    "Rotura de las membranas amnióticas.",
+    "Agentes farmacológicos (inmunosupresores).",
+    "Desnutrición.",
+    "Aumento de la exposición ambiental a los agentes patógenos.",
+    "Inmunosupresión.",
+    "Inmunidad adquirida inadecuada.",
+    "Alteración de las defensas primarias (rotura de la piel, traumatismo de los tejidos, disminución de la acción ciliar, estasis de los líquidos corporales, cambio del pH de las secreciones, alteración del peristaltismo).",
+    "Alteración de las defensas secundarias (disminución de la hemoglobina, leucopenia, supresión de la respuesta inflamatoria).",
+    "Enfermedades crónicas."
+  ],
   defining_characteristics: [],
-  objectives: ["0204","1101","1609","1807","1900","1902","1908"],
-  interventions: ["1876","3660","5622","6530","6540","6550"]
+  objectives: ["0204", "1101", "1609", "1807", "1900", "1902", "1908"],
+  interventions: ["1876", "3660", "5622", "6530", "6540", "6550"]
 };
+// 00005
 DIAGNOSTICS["00005"] = {
-  code: "00005", title: "Riesgo de desequilibrio de la temperatura corporal",
+  code: "00005",
+  title: "Riesgo de desequilibrio de la temperatura corporal",
   definition: "Riesgo de sufrir un fallo de los mecanismos reguladores de la temperatura corporal.",
-  related_factors: ["Extremos ponderales.","Enfermedad o traumatismo que afecta la regulación de la temperatura.","Deshidratación.","Sedación.","Inactividad o actividad vigorosa.","Ropas inadecuadas para la temperatura ambiente.","Alteración de la tasa metabólica.","Extremos de edad.","Medicamentos que provocan vasodilatación o vasoconstricción.","Exposición al frío o al calor en ambientes fríos o calientes sin las debidas precauciones."],
+  related_factors: [
+    "Extremos ponderales.",
+    "Enfermedad o traumatismo que afecta la regulación de la temperatura.",
+    "Deshidratación.",
+    "Sedación.",
+    "Inactividad o actividad vigorosa.",
+    "Ropas inadecuadas para la temperatura ambiente.",
+    "Alteración de la tasa metabólica.",
+    "Extremos de edad.",
+    "Medicamentos que provocan vasodilatación o vasoconstricción.",
+    "Exposición al frío o al calor en ambientes fríos o calientes sin las debidas precauciones."
+  ],
   defining_characteristics: [],
-  objectives: ["0602","0800","1902","1908"],
-  interventions: ["3900","4120","6480","6680"]
-};
-DIAGNOSTICS["00155"] = {
-  code: "00155", title: "Riesgo de caídas",
-  definition: "Aumento de la susceptibilidad de caídas que pueden causar daño físico.",
-  related_factors: ["Adultos: Historia de Caídas, Uso de silla de ruedas, Edad ≥ 65, Mujer (anciana), Vivir solo, Prótesis extremidades inferiores, Uso de dispositivos de ayuda (bastón, andador).","Fisiológicos: Enfermedad aguda, Estados postoperatorios, Dificultades Visuales, Dificultades auditivas, Artritis, Hipotensión ortostática, Insomnio, Mareos, Anemia, Enfermedad vascular, Neoplasmas, Urgencia/incontinencia urinaria, Diarrea, Disminución fuerza extremidades inferiores, Cambios de glucosa, Problemas en los pies, Deterioro movilidad física, Alteración del equilibrio, Dificultad en la marcha, Déficit propioceptivos, Neuropatía.","Cognitivos: Alteración del estado mental (confusión, delirio, demencia).","Medicamentos: Agentes antihipertensivos, Diuréticos, Antidepresivos tricíclicos, Alcohol, Narcóticos, Ansiolíticos, Hipnóticos o tranquilizantes.","Ambientales: Sujeciones, Condiciones climáticas (hielo), Alfombras, Entorno desordenado, Habitación desconocida, débilmente iluminada, Falta de material antideslizante en bañera/ducha.","Niños: Edad inferior a 2 años, Varón con menos de 1 año, Falta de autosujecciones, Falta de barandilla protectora, Falta de protección en ventanas, Cama cerca de ventana, Dejar solo al niño en superficies elevadas, Falta supervisión parental."],
-  defining_characteristics: [],
-  objectives: ["1902","1909","1912"],
-  interventions: ["6486","6490","6654"]
+  objectives: ["0602", "0800", "1902", "1908"],
+  interventions: ["3900", "4120", "6480", "6680"]
 };
 
+// ===== DIAGNÓSTICO 00155 (completo) =====
+DIAGNOSTICS["00155"] = {
+  code: "00155",
+  title: "Riesgo de caídas",
+  definition: "Aumento de la susceptibilidad de caídas que pueden causar daño físico.",
+  related_factors: [
+    "Adultos: Historia de Caídas, Uso de silla de ruedas, Edad ≥ 65, Mujer (anciana), Vivir solo, Prótesis extremidades inferiores, Uso de dispositivos de ayuda (bastón, andador).",
+    "Fisiológicos: Enfermedad aguda, Estados postoperatorios, Dificultades Visuales, Dificultades auditivas, Artritis, Hipotensión ortostática, Insomnio, Mareos, Anemia, Enfermedad vascular, Neoplasmas, Urgencia/incontinencia urinaria, Diarrea, Disminución fuerza extremidades inferiores, Cambios de glucosa, Problemas en los pies, Deterioro movilidad física, Alteración del equilibrio, Dificultad en la marcha, Déficit propioceptivos, Neuropatía.",
+    "Cognitivos: Alteración del estado mental (confusión, delirio, demencia).",
+    "Medicamentos: Agentes antihipertensivos, Diuréticos, Antidepresivos tricíclicos, Alcohol, Narcóticos, Ansiolíticos, Hipnóticos o tranquilizantes.",
+    "Ambientales: Sujeciones, Condiciones climáticas (hielo), Alfombras, Entorno desordenado, Habitación desconocida, débilmente iluminada, Falta de material antideslizante en bañera/ducha.",
+    "Niños: Edad inferior a 2 años, Varón con menos de 1 año, Falta de autosujecciones, Falta de barandilla protectora, Falta de protección en ventanas, Cama cerca de ventana, Dejar solo al niño en superficies elevadas, Falta supervisión parental."
+  ],
+  defining_characteristics: [],
+  objectives: ["1902", "1909", "1912"],
+  interventions: ["6486", "6490", "6654"]
+};
+
+// Para el resto de diagnósticos, asignamos datos genéricos (para que aparezcan en la lista)
 DIAGNOSTIC_LIST.forEach(item => {
   if (!DIAGNOSTICS[item.code]) {
     DIAGNOSTICS[item.code] = {
-      code: item.code, title: item.title,
+      code: item.code,
+      title: item.title,
       definition: "Diagnóstico completo disponible en la versión ampliada de la base de datos.",
       related_factors: ["Consulte la documentación original para obtener todos los factores relacionados."],
       defining_characteristics: ["Consulte la documentación original para las características definitorias."],
-      objectives: [], interventions: []
+      objectives: [],
+      interventions: []
     };
   }
 });
 
 // ================================================================
-// OBJETIVOS (NOC)
+// 2. OBJETIVOS (NOC) - Solo los referenciados en los diagnósticos
+//    Se incluyen todos los códigos que aparecen en los arrays de objetivos
 // ================================================================
 const NOC = {
   "1004": { code:"1004", title:"Estado nutricional", definition:"Magnitud a la que están disponibles los nutrientes para cumplir con las necesidades metabólicas.", domain:"Salud fisiológica (II)", class:"Nutrición (K)", scale:"Comprometido: Extremadamente / Sustancialmente / Moderadamente / Levemente / No comprometido (a)", indicators:["Ingestión de nutrientes","Ingestión alimentaria y de líquidos","Energía","Masa corporal","Peso","Determinaciones bioquímicas"] },
@@ -369,7 +840,7 @@ const NOC = {
   "1802": { code:"1802", title:"Conocimiento: dieta", definition:"Grado de comprensión transmitido sobre la dieta.", domain:"Conocimiento y conducta en salud (IV)", class:"Conocimiento sobre la salud (S)", scale:"Ninguno / Escaso / Moderado / Sustancial / Extenso (i)", indicators:["Descripción de la dieta recomendada","Explicación del fundamento de la dieta recomendada","Descripción de las ventajas de seguir la dieta recomendada","Establecimiento de objetivos para la dieta","Explicación de las relaciones entre dieta, ejercicio y peso corporal"] },
   "0204": { code:"0204", title:"Consecuencias de la inmovilidad: fisiológicas", definition:"Grado de compromiso en el funcionamiento fisiológico debido a la alteración de la movilidad física.", domain:"Salud funcional (I)", class:"Movilidad (C)", scale:"Intensa / Sustancial / Moderada / Ligera / Ninguna (n)", indicators:["Úlceras de presión","Estreñimiento","Impactación fecal","Disminución del estado nutricional","Hipoactividad intestinal","Íleo paralítico","Cálculos urinarios","Retención urinaria","Fiebre","Infección del tracto urinario"] },
   "1101": { code:"1101", title:"Integridad tisular: piel y membranas mucosas", definition:"Indemnidad y función fisiológica normal de la piel y de las membranas mucosas.", domain:"Salud fisiológica (II)", class:"Integridad tisular (L)", scale:"Comprometida: Extremadamente / Sustancialmente / Moderadamente / Levemente / No comprometida (a)", indicators:["Temperatura tisular en el rango esperado","Sensibilidad","Elasticidad","Hidratación","Pigmentación","Transpiración","Coloración","Textura"] },
-  "1609": { code:"1609", title:"Conducta terapéutica: enfermedad o lesión", definition:"Acciones personales para controlar la enfermedad o lesión y sus secuelas.", domain:"Conocimiento y conducta en salud (IV)", class:"Conducta en salud (Q)", scale:"Manifestado: Nunca / Raramente / En ocasiones / Con frecuencia / Constantemente (m)", indicators:["Cumple las precauciones recomendadas","Cumple el régimen terapéutico recomendado","Cumple los tratamientos prescritos","Cumple las actividades prescritas","Cumple el régimen de medicación"] },
+  "1609": { code:"1609", title:"Conducta terapéutica: enfermedad o lesión", definition:"Acciones personales para controlar la enfermedad o lesión y sus secuelas.", domain:"Conocimiento y conducta en salud (IV)", class:"Conducta en salud (Q)", scale:"Manifestada: Nunca / Raramente / En ocasiones / Con frecuencia / Constantemente (m)", indicators:["Cumple las precauciones recomendadas","Cumple el régimen terapéutico recomendado","Cumple los tratamientos prescritos","Cumple las actividades prescritas","Cumple el régimen de medicación"] },
   "1807": { code:"1807", title:"Conocimiento: control de la infección", definition:"Grado de comprensión transmitida sobre la prevención y el control de la infección.", domain:"Conocimiento y conducta en salud (IV)", class:"Conocimiento sobre la salud (S)", scale:"Ninguno / Escaso / Moderado / Sustancial / Extenso (i)", indicators:["Descripción del modo de transmisión","Descripción de los factores que contribuyen a la transmisión","Descripción de prácticas que reducen la transmisión","Descripción de signos y síntomas"] },
   "1900": { code:"1900", title:"Conducta de vacunación", definition:"Acciones personales para asegurar el estado de inmunización.", domain:"Conocimiento y conducta en salud (IV)", class:"Control del riesgo y seguridad (T)", scale:"Manifestado: Nunca / Raramente / En ocasiones / Con frecuencia / Constantemente (m)", indicators:["Reconoce el riesgo de enfermedad sin vacunación","Describe los riesgos asociados con la vacunación específica","Aporta la cartilla de vacunación actualizada en cada visita","Cumple las vacunaciones recomendadas para su edad"] },
   "1902": { code:"1902", title:"Control del riesgo", definition:"Acciones para eliminar o reducir las amenazas para la salud, reales, personales y modificables.", domain:"Conocimiento y conducta en salud (IV)", class:"Control del riesgo y seguridad (T)", scale:"Manifestado: Nunca / Raramente / En ocasiones / Con frecuencia / Constantemente (m)", indicators:["Reconoce el riesgo","Supervisa los factores de riesgo medioambientales","Supervisa los factores de riesgo de la conducta personal","Desarrolla estrategias de control del riesgo efectivas","Adapta las estrategias de control del riesgo según es necesario"] },
@@ -381,7 +852,7 @@ const NOC = {
 };
 
 // ================================================================
-// INTERVENCIONES (NIC) - Referenciadas
+// 3. INTERVENCIONES (NIC) - Solo las referenciadas
 // ================================================================
 const NIC = {
   "0200": { code:"0200", title:"Fomento del ejercicio", definition:"Facilitar regularmente, la realización de ejercicios físicos con el fin de mantener o mejorar el estado físico y el nivel de salud.", activities:["Valorar las ideas del paciente sobre el efecto del ejercicio físico en la salud.","Fomentar la manifestación oral de sentimientos acerca de los ejercicios o la necesidad de los mismos.","Ayudar a identificar un modelo positivo para el mantenimiento del programa de ejercicios.","Incluir a la familia / cuidadores del paciente en la planificación y mantenimiento del programa de ejercicios.","Informar al paciente acerca de los beneficios para la salud y los efectos psicológicos del ejercicio.","Instruir al paciente acerca del tipo de ejercicio adecuado para su nivel de salud, en colaboración con el médico y/o fisioterapeuta.","Instruir al paciente acerca de la frecuencia, duración e intensidad deseadas de los ejercicios del programa.","Ayudar al paciente a preparar y registrar en un gráfico/hoja, los progresos para motivar la adhesión al programa de ejercicios.","Instruir al paciente acerca de las condiciones que justifiquen el cese o alteración del programa de ejercicios.","Instruir al paciente en los ejercicios de precalentamiento y relajación adecuados."] },
@@ -391,7 +862,7 @@ const NIC = {
   "4420": { code:"4420", title:"Acuerdo con el paciente", definition:"Negocio de un acuerdo con el paciente para reforzar un cambio de conducta específico.", activities:["Animar al paciente a que determine sus virtudes y habilidades.","Ayudar al paciente a identificar las prácticas sobre la salud que desea cambiar.","Determinar con el paciente los objetivos de los cuidados.","Animar al paciente a que identifique sus propios objetivos, no los que cree que espera el cuidador.","Al ayudar al paciente a identificar las metas, evitar centrarse en el diagnóstico o proceso de enfermedad únicamente.","Ayudar al paciente a establecer objetivos realistas, que puedan conseguirse.","Ayudar al paciente a establecer los objetivos a corto y largo plazo.","Alentar al paciente a que escriba sus propios objetivos, si fuera posible.","Establecer objetivos como conductas fácilmente distinguibles.","Establecer objetivos en términos positivos.","Ayudar al paciente a dividir las metas complejas en pasos pequeños, manejables.","Clarificar con el paciente los papeles del cuidador y del paciente, respectivamente.","Explorar con el paciente las mejores formas de conseguir los objetivos.","Ayudar al paciente a examinar los recursos disponibles para cumplir con los objetivos.","Ayudar al paciente a desarrollar un plan para cumplir los objetivos.","Ayudar al paciente a identificar las circunstancias actuales del ambiente que puedan interferir en la consecución de los objetivos.","Ayudar al paciente a identificar los métodos para superar las circunstancias ambientales que pueden interferir en la consecución de objetivos.","Explorar con el paciente métodos de evaluación de la consecución de los objetivos.","Disponer un ambiente abierto, de aceptación, para la creación del acuerdo.","Facilitar la implicación de los seres queridos en el proceso de acuerdo, si así lo desea el paciente.","Facilitar la redacción de un documento por escrito que incluya todos los elementos acordados.","Ayudar al paciente a establecer las necesidades de tiempo y de frecuencia para la realización de las conductas / acciones.","Ayudar al paciente a establecer límites de tiempo realistas.","Identificar con el paciente las consecuencias o sanciones por el incumplimiento del acuerdo, si se desea.","Disponer la firma del acuerdo por todas las partes implicadas.","Proporcionar al paciente una copia del acuerdo firmado y fechado.","Animar al paciente a que identifique recompensas adecuadas, que tengan sentido.","Animar al paciente a que elija un refuerzo / recompensa que sea lo suficientemente importante como para mantener la conducta.","Identificar las recompensas adicionales con el paciente, si se superan los objetivos originales, según deseos.","Especificar con el paciente el tiempo de entrega de los refuerzos / recompensas.","Instruir al paciente en los diversos métodos de seguimiento y registro de las conductas.","Ayudar al paciente a desarrollar algún modelo de hoja de información que ayude en el seguimiento de los progresos hacia los objetivos.","Ayudar al paciente a identificar hasta los más pequeños éxitos.","Explorar con el paciente las razones del éxito o la falta de éste."] },
   "5246": { code:"5246", title:"Asesoramiento nutricional", definition:"Utilización de un proceso de ayuda interactivo centrado en la necesidad de modificación de la dieta.", activities:["Establecer una relación terapéutica basada en la confianza y el respeto.","Establecer la duración de relación de asesoramiento.","Determinar la ingesta y los hábitos alimentarios del paciente.","Facilitar la identificación de las conductas alimentarias que se desean cambiar.","Establecer metas realistas a corto y largo plazo para el cambio del estado nutricional.","Utilizar normas nutricionales aceptadas para ayudar al paciente a valorar la conveniencia de la ingesta dietética.","Proporcionar información, si es necesario, acerca de la necesidad de modificación de la dieta por razones de salud: pérdida de peso, ganancia de peso, restricción de sodio, reducción del colesterol, restricción de líquidos, etc.","Colocar material atractivo de guía de comidas en la habitación del paciente (la pirámide de guía de los alimentos).","Ayudar al paciente a considerar los factores de edad, estado de crecimiento y desarrollo, experiencias alimentarias pasadas, lesiones, enfermedades, cultura y economía en la planificación de las formas de cumplir con las necesidades nutricionales.","Determinar el conocimiento por parte del paciente de los cuatro grupos alimenticios básicos, así como la percepción de la necesaria modificación de la dieta.","Discutir las necesidades nutricionales y la percepción del paciente de la dieta prescrita / recomendada.","Comentar los gustos y aversiones alimentarias del paciente.","Ayudar al paciente a registrar lo que come normalmente en un periodo de 24 horas.","Revisar con el paciente la medición de ingesta y eliminación de líquidos, valores de hemoglobina, lecturas de presión sanguínea o ganancias y pérdidas de peso, si procede.","Discutir los hábitos de compra de comidas y los límites de presupuesto.","Discutir el significado de la comida para el paciente.","Determinar actitudes y creencias de los seres queridos acerca de la comida, el comer y el cambio nutricional necesario del paciente.","Valorar el progreso de las metas de modificación dietética a intervalos regulares.","Ayudar al paciente a expresar sentimientos e inquietudes acerca de la consecución de las metas.","Valorar los esfuerzos realizados para conseguir los objetivos.","Disponer una visita / consulta a otros miembros del equipo de cuidados, si procede."] },
   "5614": { code:"5614", title:"Enseñanza: dieta prescrita", definition:"Preparación de un paciente para seguir una dieta prescrita.", activities:["Evaluar el nivel actual de conocimientos del paciente acerca de la dieta prescrita.","Conocer los sentimientos / actitud del paciente / ser querido acerca de la dieta prescrita y del grado de cumplimiento dietético esperado.","Enseñar al paciente el nombre correcto de la dieta prescrita.","Explicar el propósito de la dieta.","Informar al paciente del tiempo durante el que debe seguirse la dieta.","Enseñar al paciente a llevar un diario de comidas, si resulta posible.","Instruir al paciente sobre las comidas permitidas y prohibidas.","Informar al paciente de las posibles interacciones de fármacos / comida, si procede.","Ayudar al paciente a acomodar sus preferencias de comidas en la dieta prescrita.","Ayudar al paciente a sustituir ingredientes que se acomoden a sus recetas favoritas en la dieta prescrita.","Enseñar al paciente a leer las etiquetas y seleccionar los alimentos adecuados.","Observar la selección de alimentos adecuados a la dieta prescrita, por parte del paciente.","Enseñar al paciente a planificar las comidas adecuadas.","Proporcionar un plan escrito de comidas, si procede.","Recomendar un libro de cocina que incluya recetas coherentes con la dieta, si procede.","Reforzar la información proporcionada por otros miembros del equipo de cuidados, según corresponda.","Remitir al paciente a un dietista / experto en nutrición, si es preciso.","Incluir a la familia / ser querido, según el caso."] },
-  "1030": { code:"1030", title:"Manejo de los trastornos de la alimentación", definition:"Prevención y tratamiento de restricciones severas en la dieta, los ejercicios en exceso y purga de alimentos y líquidos.", activities:["Colaborar con otros miembros del equipo de cuidados para desarrollar un plan de tratamiento; implicar al paciente y/o ser querido, si procede.","Hablar con el paciente y con el equipo para establecer un peso señalado como objetivo, si el paciente no está dentro del margen de peso recomendado para la edad y estructura corporal.","Establecer la cantidad de ganancia de peso diaria que se desee.","Hablar con el dietista para determinar la ingesta calórica diaria necesaria para conseguir y/o mantener el peso marcado como objetivo.","Enseñar y reforzar los conceptos de buena nutrición con el paciente y seres queridos, si procede.","Animar al paciente a discutir preferencias alimentarias con el dietista.","Desarrollar una relación de apoyo con el paciente.","Vigilar los parámetros fisiológicos (signos vitales y niveles de electrolitos) que sean necesarios.","Pasar diariamente (a la misma hora del día y después de evacuar).","Controlar la ingesta y eliminación de líquidos, si procede.","Vigilar la ingesta calórica diaria.","Fomentar la autovigilancia de la ingesta diaria de alimentos y la ganancia / mantenimiento del peso, si procede.","Establecer expectativas sobre conductas de alimentación adecuadas, de ingesta de comida / líquidos y de cantidad de actividad física.","Acordar una conducta con el paciente para provocar las conductas de ganancia o mantenimiento de peso deseadas.","Restringir la disponibilidad de comida, establecer comidas programadas, servidas de antemano y tentempiés.","Observar al paciente antes y después de las comidas / tentempiés para asegurar que se consigue y mantiene la ingesta adecuada.","Acompañar al paciente al baño durante los momentos de observación establecidos después de las comidas / tentempiés.","Limitar el tiempo que pasa en el baño en los periodos en que no hay observación.","Controlar las conductas del paciente respecto de la alimentación, pérdida y ganancia de peso."] },
+  "1030": { code:"1030", title:"Manejo de los trastornos de la alimentación", definition:"Prevención y tratamiento de restricciones severas en la dieta, los ejercicios en exceso y purga de alimentos y líquidos.", activities:["Colaborar con otros miembros del equipo de cuidados para desarrollar un plan de tratamiento; implicar al paciente y/o ser querido, si procede.","Hablar con el paciente y con el equipo para establecer un peso señalado como objetivo, si el paciente no está dentro del margen de peso recomendado para la edad y estructura corporal.","Establecer la cantidad de ganancia de peso diario que se desee.","Hablar con el dietista para determinar la ingesta calórica diaria necesaria para conseguir y/o mantener el peso marcado como objetivo.","Enseñar y reforzar los conceptos de buena nutrición con el paciente y seres queridos, si procede.","Animar al paciente a discutir preferencias alimentarias con el dietista.","Desarrollar una relación de apoyo con el paciente.","Vigilar los parámetros fisiológicos (signos vitales y niveles de electrolitos) que sean necesarios.","Pasar diariamente (a la misma hora del día y después de evacuar).","Controlar la ingesta y eliminación de líquidos, si procede.","Vigilar la ingesta calórica diaria.","Fomentar la autovigilancia de la ingesta diaria de alimentos y la ganancia / mantenimiento del peso, si procede.","Establecer expectativas sobre conductas de alimentación adecuadas, de ingesta de comida / líquidos y de cantidad de actividad física.","Acordar una conducta con el paciente para provocar las conductas de ganancia o mantenimiento de peso deseadas.","Restringir la disponibilidad de comida, establecer comidas programadas, servidas de antemano y tentempiés.","Observar al paciente antes y después de las comidas / tentempiés para asegurar que se consigue y mantiene la ingesta adecuada.","Acompañar al paciente al baño durante los momentos de observación establecidos después de las comidas / tentempiés.","Limitar el tiempo que pasa en el baño en los periodos en que no hay observación.","Controlar las conductas del paciente respecto de la alimentación, pérdida y ganancia de peso."] },
   "1240": { code:"1240", title:"Ayuda para ganar peso", definition:"Facilitar el aumento de peso corporal.", activities:["Ayudar en la realización del diagnóstico para determinar la causa de la falta de peso, si procede.","Pasar al paciente a los intervalos determinados, si procede.","Analizar posibles causas del bajo peso corporal.","Observar si hay náuseas y vómitos.","Determinar la causa de la náusea y/o vómitos y tratarla convenientemente.","Administrar medicamentos para reducir las náuseas y el dolor antes de comer, si es necesario.","Controlar periódicamente el consumo diario de calorías.","Controlar periódicamente los niveles de albúmina, linfocitos y electrolitos en suero.","Fomentar el aumento de ingesta de calorías.","Enseñar a aumentar la ingesta de calorías.","Proporcionar alimentos nutritivos de alto contenido calórico variados, para poder seleccionar algunos.","Considerar las preferencias alimenticias del paciente teniendo en cuenta su gusto personal, cultura y religión.","Proporcionar cuidados bucales antes de las comidas, si es necesario.","Disponer periodos de descanso, si es necesario.","Asegurarse de que el paciente se encuentra en posición de sentado antes de comer o alimentarse.","Ayudar o alimentar al paciente, si procede.","Proporcionar alimentos adecuados al paciente: dieta general, de masticación fácil, fórmula mezcladas o comerciales por medio de sonda nasogástrica o de gastrostomía o nutrición parenteral total, según órdenes médicas.","Crear un ambiente agradable y relajado a la hora de la comida.","Servir las comidas de forma agradable y atractiva.","Analizar con el paciente y la familia los factores socioeconómicos que contribuyen a una nutrición inadecuada.","Analizar con el paciente y la familia la percepción de los factores que interfieren en la capacidad o el deseo de comer.","Remitir a instituciones comunitarias que puedan ayudar en la obtención de comida, si procede.","Enseñar al paciente y familia, a planificar las comidas, si procede.","Enseñar al paciente y familia a comprar alimentos de bajo coste y nutritivos, si procede.","Recompensar al paciente por la ganancia de peso.","Registrar el progreso de la ganancia de peso en una hoja y colocarla en un sitio estratégico.","Fomentar la asistencia a grupos de apoyo, si procede."] },
   "2080": { code:"2080", title:"Manejo de líquidos / electrolitos", definition:"Regular y prevenir las complicaciones derivadas de niveles de líquidos y/o electrolitos alterados.", activities:["Observar si los niveles de electrolitos en suero son normales, si existe disponibilidad.","Obtener muestras para el análisis en el laboratorio de los niveles de líquidos o electrolitos alterados (niveles de hematocrito, BUN, proteínas, sodio y potasio), si procede.","Pesar a diario y valorar la evolución.","Restringir la libre ingesta de agua en presencia de hiponatremia dilucional con un nivel de Na en suero inferior a 130 mEq por litro.","Administrar líquidos, si está indicado.","Favorecer la ingesta oral (proporcionar líquidos según preferencias del paciente, colocarlos a su alcance, proporcionar paja para beber y agua fresca), si resulta oportuno.","Reponer líquidos por vía nasogástrica, si está prescrito, en función de la eliminación, si procede.","Administrar fibra según prescripción, al paciente alimentado por sonda para reducir la pérdida de líquidos y electrolitos causada por la diarrea.","Minimizar el número de cubitos de hielo consumidos o la cantidad de ingesta oral en pacientes con sondas gástricas conectadas a un aspirador.","Irrigar la sonda nasogástrica con solución salina normal.","Proporcionar agua libremente con la alimentación por sonda, si resulta oportuno.","Ajustar un nivel de flujo de perfusión intravenosa (o transfusión de sangre) adecuado.","Controlar los valores de laboratorio relevantes para el equilibrio de líquidos (niveles de hematocrito, BUN, albúmina, proteínas totales, osmolaridad del suero y gravedad específica de la orina).","Vigilar los resultados de laboratorio relevantes en la retención de líquidos (aumento de la gravedad específica, aumento de BUN, disminución de hematocrito y aumento de los niveles de osmolaridad de la orina).","Monitorizar el estado hemodinámico, incluyendo niveles de PVC, PAM, PAP y PCPE, según disponibilidad.","Llevar un registro preciso de ingesta y eliminación.","Observar si hay signos y síntomas de retención de líquidos.","Proceder a la restricción de líquidos, si es oportuno.","Vigilar los signos vitales, si procede."] },
   "1260": { code:"1260", title:"Manejo del peso", definition:"Facilitar el mantenimiento del peso corporal óptimo y el porcentaje de grasa corporal.", activities:["Tratar con el paciente la relación que hay entre la ingesta de alimentos, el ejercicio, la ganancia y la pérdida de peso.","Discutir con el paciente las condiciones médicas que pueden afectar el peso.","Tratar con el paciente los hábitos, costumbres y factores culturales y hereditarios que ejercen su influencia sobre el peso.","Discutir los riesgos asociados con el hecho de estar por encima o por debajo del peso.","Determinar la motivación del paciente para cambiar los hábitos en la alimentación.","Determinar el peso corporal ideal del paciente.","Determinar el porcentaje de grasa corporal ideal del paciente.","Desarrollar con el paciente un método para llevar un registro diario de ingesta.","Animar al paciente a escribir metas semanales realistas en cuanto a ingesta de alimentos y ejercicios y colocarlas en un sitio en el que pueda revisarlas todos los días.","Animar al paciente a registrar el peso semanalmente, si procede.","Informar al paciente si existen grupos de apoyo disponibles para su ayuda.","Ayudar en el desarrollo de planes de comidas bien equilibradas, coherentes con el nivel de gasto energético."] },
@@ -411,7 +882,7 @@ const NIC = {
 };
 
 // ================================================================
-// LÓGICA DE LA APLICACIÓN
+// 4. LÓGICA DE LA APLICACIÓN
 // ================================================================
 const diagnosticListEl = document.getElementById('diagnosticList');
 const searchInput = document.getElementById('searchInput');
@@ -430,14 +901,9 @@ const modalBody = document.getElementById('modalBody');
 let currentDiagnosticCode = null;
 let currentTab = 'diagnosticos';
 const RECENT_KEY = 'recentDiagnostics';
-let recentDiagnostics = [];
+let recentDiagnostics = JSON.parse(localStorage.getItem(RECENT_KEY)) || [];
 
-try {
-  recentDiagnostics = JSON.parse(localStorage.getItem(RECENT_KEY)) || [];
-} catch (e) {
-  recentDiagnostics = [];
-}
-
+// Renderizar lista de diagnósticos
 function renderDiagnosticList(filter = '') {
   const filtered = DIAGNOSTIC_LIST.filter(item =>
     item.code.includes(filter) || item.title.toLowerCase().includes(filter.toLowerCase())
@@ -453,6 +919,7 @@ function renderDiagnosticList(filter = '') {
   });
 }
 
+// Mostrar diagnóstico
 function showDiagnostic(code) {
   if (currentTab !== 'diagnosticos') {
     switchTab('diagnosticos');
@@ -510,6 +977,7 @@ function showDiagnostic(code) {
   });
 }
 
+// Modal - CORREGIDO para mostrar la escala numérica (1-5) en objetivos
 function openModal(type, code) {
   let data = type === 'noc' ? NOC[code] : NIC[code];
   if (!data) {
@@ -521,6 +989,7 @@ function openModal(type, code) {
     modalSub.textContent = type === 'noc' ? `Dominio: ${data.domain} · Clase: ${data.class} · Escala: ${data.scale}` : `Definición: ${data.definition}`;
     let bodyHtml = '';
     if (type === 'noc') {
+      // Construir tabla con indicadores y escala numérica 1-5
       let tableHtml = `<table>
         <thead>
           <tr>
@@ -562,13 +1031,12 @@ function closeModal() { modalOverlay.classList.remove('active'); }
 closeModalBtn.addEventListener('click', closeModal);
 modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
 
+// Recientes
 function addRecent(code) {
   recentDiagnostics = recentDiagnostics.filter(c => c !== code);
   recentDiagnostics.unshift(code);
   if (recentDiagnostics.length > 5) recentDiagnostics.pop();
-  try {
-    localStorage.setItem(RECENT_KEY, JSON.stringify(recentDiagnostics));
-  } catch (e) {}
+  localStorage.setItem(RECENT_KEY, JSON.stringify(recentDiagnostics));
   renderRecent();
 }
 function renderRecent() {
@@ -584,14 +1052,16 @@ function renderRecent() {
 }
 clearRecentBtn.addEventListener('click', () => {
   recentDiagnostics = [];
-  try { localStorage.removeItem(RECENT_KEY); } catch(e){}
+  localStorage.removeItem(RECENT_KEY);
   renderRecent();
 });
 
+// Búsqueda
 searchInput.addEventListener('input', (e) => {
   renderDiagnosticList(e.target.value);
 });
 
+// TABS
 function switchTab(tab) {
   currentTab = tab;
   document.querySelectorAll('.tabs button').forEach(btn => {
@@ -620,322 +1090,98 @@ document.querySelectorAll('.tabs button').forEach(btn => {
 });
 
 // ================================================================
-// GENERACIÓN DE PDFs PROFESIONALES
+// 5. DESCARGA PDF
 // ================================================================
-const PDF_ACCENT = [26, 115, 232]; // #1a73e8 en RGB
-const PDF_TEXT = [30, 42, 58];     // #1e2a3a en RGB
-const PDF_GRAY = [80, 80, 80];
-
-function newPDF() {
-  const { jsPDF } = window.jspdf;
-  const pdf = new jsPDF('p', 'mm', 'a4');
-  pdf.setFillColor(255, 255, 255);
-  pdf.rect(0, 0, 210, 297, 'F');
-  return pdf;
-}
-
-function addHeader(pdf, title, subtitle) {
-  pdf.setFillColor(PDF_ACCENT[0], PDF_ACCENT[1], PDF_ACCENT[2]);
-  pdf.rect(0, 0, 210, 28, 'F');
-  pdf.setTextColor(255, 255, 255);
-  pdf.setFontSize(16);
-  pdf.setFont('helvetica', 'bold');
-  pdf.text(title, 15, 14);
-  pdf.setFontSize(10);
-  pdf.setFont('helvetica', 'normal');
-  pdf.text(subtitle, 15, 21);
-  pdf.setTextColor(PDF_TEXT[0], PDF_TEXT[1], PDF_TEXT[2]);
-  return 32;
-}
-
-function addFooter(pdf, pageNum, totalPages) {
-  const y = 287;
-  pdf.setDrawColor(200, 200, 200);
-  pdf.line(15, y - 5, 195, y - 5);
-  pdf.setFontSize(8);
-  pdf.setTextColor(120, 120, 120);
-  pdf.setFont('helvetica', 'normal');
-  pdf.text('NANDA·NOC·NIC · Hospital Militar Dr. Joaquín Castillo Duany · LD SmartLab 2026', 15, y);
-  pdf.text(`Página ${pageNum} de ${totalPages}`, 195, y, { align: 'right' });
-  pdf.setTextColor(PDF_TEXT[0], PDF_TEXT[1], PDF_TEXT[2]);
-}
-
-function wrapText(pdf, text, maxWidth) {
-  return pdf.splitTextToSize(text, maxWidth);
-}
-
-function addSectionTitle(pdf, title, y) {
-  if (y > 260) { pdf.addPage(); y = 20; pdf.setFillColor(255,255,255); pdf.rect(0,0,210,297,'F'); }
-  pdf.setFontSize(13);
-  pdf.setFont('helvetica', 'bold');
-  pdf.setTextColor(PDF_ACCENT[0], PDF_ACCENT[1], PDF_ACCENT[2]);
-  pdf.text(title, 15, y);
-  pdf.setDrawColor(PDF_ACCENT[0], PDF_ACCENT[1], PDF_ACCENT[2]);
-  pdf.line(15, y + 1.5, 195, y + 1.5);
-  pdf.setTextColor(PDF_TEXT[0], PDF_TEXT[1], PDF_TEXT[2]);
-  return y + 6;
-}
-
-function addParagraph(pdf, text, y, indent = 0) {
-  const maxW = 180 - indent;
-  pdf.setFontSize(10);
-  pdf.setFont('helvetica', 'normal');
-  const lines = wrapText(pdf, text, maxW);
-  const lineHeight = 4.5;
-  if (y + lines.length * lineHeight > 280) {
-    pdf.addPage();
-    y = 20;
-    pdf.setFillColor(255,255,255);
-    pdf.rect(0,0,210,297,'F');
-  }
-  pdf.text(lines, 15 + indent, y);
-  return y + lines.length * lineHeight + 2;
-}
-
-function addBulletList(pdf, items, y) {
-  items.forEach(item => {
-    const maxW = 170;
-    pdf.setFontSize(10);
-    pdf.setFont('helvetica', 'normal');
-    const lines = wrapText(pdf, "• " + item, maxW);
-    const lineHeight = 4.5;
-    if (y + lines.length * lineHeight > 280) {
-      pdf.addPage();
-      y = 20;
-      pdf.setFillColor(255,255,255);
-      pdf.rect(0,0,210,297,'F');
-    }
-    pdf.text(lines, 20, y);
-    y += lines.length * lineHeight + 1.5;
-  });
-  return y + 2;
-}
-
-function addNumberedList(pdf, items, y) {
-  items.forEach((item, idx) => {
-    const maxW = 170;
-    pdf.setFontSize(10);
-    pdf.setFont('helvetica', 'normal');
-    const lines = wrapText(pdf, (idx + 1) + ". " + item, maxW);
-    const lineHeight = 4.5;
-    if (y + lines.length * lineHeight > 280) {
-      pdf.addPage();
-      y = 20;
-      pdf.setFillColor(255,255,255);
-      pdf.rect(0,0,210,297,'F');
-    }
-    pdf.text(lines, 20, y);
-    y += lines.length * lineHeight + 1.5;
-  });
-  return y + 2;
-}
-
-// ---------- PDF VISIBLE ----------
 async function downloadVisiblePDF() {
-  if (!currentDiagnosticCode) {
+  const element = document.getElementById('diagnosticDetail');
+  if (!element || element.style.display === 'none') {
     alert('Primero selecciona un diagnóstico para descargar su contenido.');
     return;
   }
-  const dx = DIAGNOSTICS[currentDiagnosticCode];
-  const pdf = newPDF();
-  let y = addHeader(pdf, dx.code + " · " + dx.title, "Diagnóstico NANDA · Ficha visible");
-
-  y = addSectionTitle(pdf, "Definición", y);
-  y = addParagraph(pdf, dx.definition, y);
-
-  if (dx.related_factors && dx.related_factors.length > 0) {
-    y = addSectionTitle(pdf, "Factores relacionados", y);
-    y = addBulletList(pdf, dx.related_factors, y);
+  const canvas = await html2canvas(element, { scale: 2, backgroundColor: '#ffffff' });
+  const imgData = canvas.toDataURL('image/png');
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF('p', 'mm', 'a4');
+  const imgWidth = 210;
+  const imgHeight = (canvas.height * imgWidth) / canvas.width;
+  let heightLeft = imgHeight;
+  let position = 0;
+  pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+  heightLeft -= pdf.internal.pageSize.height;
+  while (heightLeft > 0) {
+    position = heightLeft - imgHeight;
+    pdf.addPage();
+    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+    heightLeft -= pdf.internal.pageSize.height;
   }
-
-  if (dx.defining_characteristics && dx.defining_characteristics.length > 0) {
-    y = addSectionTitle(pdf, "Características definitorias", y);
-    y = addBulletList(pdf, dx.defining_characteristics, y);
-  }
-
-  if (dx.objectives && dx.objectives.length > 0) {
-    y = addSectionTitle(pdf, "Objetivos (NOC)", y);
-    dx.objectives.forEach(ocode => {
-      const obj = NOC[ocode];
-      if (!obj) return;
-      pdf.setFontSize(11);
-      pdf.setFont('helvetica', 'bold');
-      pdf.setTextColor(PDF_ACCENT[0], PDF_ACCENT[1], PDF_ACCENT[2]);
-      const titleLines = wrapText(pdf, obj.code + " · " + obj.title, 170);
-      if (y + titleLines.length * 5 > 275) { pdf.addPage(); y = 20; pdf.setFillColor(255,255,255); pdf.rect(0,0,210,297,'F'); }
-      pdf.text(titleLines, 18, y);
-      y += titleLines.length * 5 + 1;
-      pdf.setFontSize(9);
-      pdf.setFont('helvetica', 'normal');
-      pdf.setTextColor(PDF_GRAY[0], PDF_GRAY[1], PDF_GRAY[2]);
-      const defLines = wrapText(pdf, obj.definition, 170);
-      if (y + defLines.length * 4 > 275) { pdf.addPage(); y = 20; pdf.setFillColor(255,255,255); pdf.rect(0,0,210,297,'F'); }
-      pdf.text(defLines, 22, y);
-      y += defLines.length * 4 + 2;
-      pdf.setTextColor(PDF_TEXT[0], PDF_TEXT[1], PDF_TEXT[2]);
-    });
-  }
-
-  if (dx.interventions && dx.interventions.length > 0) {
-    y = addSectionTitle(pdf, "Intervenciones (NIC)", y);
-    dx.interventions.forEach(icode => {
-      const int = NIC[icode];
-      if (!int) return;
-      pdf.setFontSize(11);
-      pdf.setFont('helvetica', 'bold');
-      pdf.setTextColor(PDF_ACCENT[0], PDF_ACCENT[1], PDF_ACCENT[2]);
-      const titleLines = wrapText(pdf, int.code + " · " + int.title, 170);
-      if (y + titleLines.length * 5 > 275) { pdf.addPage(); y = 20; pdf.setFillColor(255,255,255); pdf.rect(0,0,210,297,'F'); }
-      pdf.text(titleLines, 18, y);
-      y += titleLines.length * 5 + 1;
-      pdf.setFontSize(9);
-      pdf.setFont('helvetica', 'normal');
-      pdf.setTextColor(PDF_GRAY[0], PDF_GRAY[1], PDF_GRAY[2]);
-      const defLines = wrapText(pdf, int.definition, 170);
-      if (y + defLines.length * 4 > 275) { pdf.addPage(); y = 20; pdf.setFillColor(255,255,255); pdf.rect(0,0,210,297,'F'); }
-      pdf.text(defLines, 22, y);
-      y += defLines.length * 4 + 2;
-      pdf.setTextColor(PDF_TEXT[0], PDF_TEXT[1], PDF_TEXT[2]);
-    });
-  }
-
-  // Pie de página en todas las páginas
-  const totalPages = pdf.internal.getNumberOfPages();
-  for (let i = 1; i <= totalPages; i++) {
-    pdf.setPage(i);
-    addFooter(pdf, i, totalPages);
-  }
-
-  pdf.save('diagnostico_' + dx.code + '.pdf');
+  pdf.save('diagnostico_visible.pdf');
 }
 
-// ---------- PDF COMPLETO ----------
 async function downloadAllPDF() {
-  const pdf = newPDF();
-  let y = addHeader(pdf, "NANDA · NOC · NIC", "Listado completo de diagnósticos, objetivos e intervenciones · v3.1");
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF('p', 'mm', 'a4');
+  let y = 10;
+  const lineHeight = 7;
+  const margin = 15;
+  const maxWidth = 210 - 2 * margin;
 
-  // SECCIÓN DIAGNÓSTICOS
-  y = addSectionTitle(pdf, "DIAGNÓSTICOS NANDA (" + DIAGNOSTIC_LIST.length + ")", y);
-  DIAGNOSTIC_LIST.forEach(item => {
+  function addText(text, size = 11, style = 'normal') {
+    pdf.setFontSize(size);
+    pdf.setFont(undefined, style);
+    const lines = pdf.splitTextToSize(text, maxWidth);
+    pdf.text(lines, margin, y);
+    y += lines.length * lineHeight;
+    if (y > 280) { pdf.addPage(); y = 10; }
+  }
+  function addTitle(title) {
+    pdf.setFontSize(16);
+    pdf.setFont(undefined, 'bold');
+    pdf.text(title, margin, y);
+    y += 10;
+    if (y > 280) { pdf.addPage(); y = 10; }
+  }
+
+  addTitle('LISTADO COMPLETO DE DIAGNÓSTICOS, OBJETIVOS E INTERVENCIONES');
+  addText('Generado por NANDA·NOC·NIC · Hospital Militar Dr. Joaquín Castillo Duany', 10, 'italic');
+  y += 4;
+
+  addTitle('DIAGNÓSTICOS NANDA');
+  for (const item of DIAGNOSTIC_LIST) {
     const dx = DIAGNOSTICS[item.code];
-    if (!dx) return;
-    pdf.setFontSize(11);
-    pdf.setFont('helvetica', 'bold');
-    pdf.setTextColor(PDF_ACCENT[0], PDF_ACCENT[1], PDF_ACCENT[2]);
-    const titleLines = wrapText(pdf, dx.code + " · " + dx.title, 180);
-    if (y + titleLines.length * 5 > 275) { pdf.addPage(); y = 20; pdf.setFillColor(255,255,255); pdf.rect(0,0,210,297,'F'); }
-    pdf.text(titleLines, 15, y);
-    y += titleLines.length * 5 + 1;
-
-    pdf.setFontSize(9);
-    pdf.setFont('helvetica', 'normal');
-    pdf.setTextColor(PDF_GRAY[0], PDF_GRAY[1], PDF_GRAY[2]);
-    const defLines = wrapText(pdf, "Definición: " + dx.definition, 175);
-    if (y + defLines.length * 4 > 275) { pdf.addPage(); y = 20; pdf.setFillColor(255,255,255); pdf.rect(0,0,210,297,'F'); }
-    pdf.text(defLines, 18, y);
-    y += defLines.length * 4 + 1;
-
-    if (dx.related_factors && dx.related_factors.length > 0 && !(dx.related_factors.length === 1 && dx.related_factors[0].startsWith('Consulte'))) {
-      const rfLines = wrapText(pdf, "Factores: " + dx.related_factors.join("; "), 175);
-      if (y + rfLines.length * 4 > 275) { pdf.addPage(); y = 20; pdf.setFillColor(255,255,255); pdf.rect(0,0,210,297,'F'); }
-      pdf.text(rfLines, 18, y);
-      y += rfLines.length * 4 + 1;
+    if (!dx) continue;
+    addText(`${dx.code} - ${dx.title}`, 11, 'bold');
+    addText(`Def: ${dx.definition}`, 10);
+    if (dx.related_factors.length) {
+      addText(`Factores relacionados: ${dx.related_factors.join('; ')}`, 9);
     }
-    if (dx.defining_characteristics && dx.defining_characteristics.length > 0 && !(dx.defining_characteristics.length === 1 && dx.defining_characteristics[0].startsWith('Consulte'))) {
-      const dcLines = wrapText(pdf, "Características: " + dx.defining_characteristics.join("; "), 175);
-      if (y + dcLines.length * 4 > 275) { pdf.addPage(); y = 20; pdf.setFillColor(255,255,255); pdf.rect(0,0,210,297,'F'); }
-      pdf.text(dcLines, 18, y);
-      y += dcLines.length * 4 + 1;
+    if (dx.defining_characteristics.length) {
+      addText(`Características: ${dx.defining_characteristics.join('; ')}`, 9);
     }
-    if (dx.objectives && dx.objectives.length > 0) {
-      const objLines = wrapText(pdf, "Objetivos: " + dx.objectives.join(", "), 175);
-      if (y + objLines.length * 4 > 275) { pdf.addPage(); y = 20; pdf.setFillColor(255,255,255); pdf.rect(0,0,210,297,'F'); }
-      pdf.text(objLines, 18, y);
-      y += objLines.length * 4 + 1;
-    }
-    if (dx.interventions && dx.interventions.length > 0) {
-      const intLines = wrapText(pdf, "Intervenciones: " + dx.interventions.join(", "), 175);
-      if (y + intLines.length * 4 > 275) { pdf.addPage(); y = 20; pdf.setFillColor(255,255,255); pdf.rect(0,0,210,297,'F'); }
-      pdf.text(intLines, 18, y);
-      y += intLines.length * 4 + 1;
-    }
+    addText(`Objetivos: ${dx.objectives.join(', ')}`, 9);
+    addText(`Intervenciones: ${dx.interventions.join(', ')}`, 9);
     y += 2;
-    pdf.setTextColor(PDF_TEXT[0], PDF_TEXT[1], PDF_TEXT[2]);
-  });
+  }
 
-  // SECCIÓN OBJETIVOS
-  pdf.addPage();
-  y = 20;
-  pdf.setFillColor(255,255,255);
-  pdf.rect(0,0,210,297,'F');
-  y = addHeader(pdf, "NANDA · NOC · NIC", "Objetivos (NOC) completos");
-  y = addSectionTitle(pdf, "OBJETIVOS NOC (" + Object.keys(NOC).length + ")", y);
-  Object.keys(NOC).forEach(code => {
+  pdf.addPage(); y = 10;
+  addTitle('OBJETIVOS NOC');
+  for (const code of Object.keys(NOC)) {
     const obj = NOC[code];
-    pdf.setFontSize(11);
-    pdf.setFont('helvetica', 'bold');
-    pdf.setTextColor(PDF_ACCENT[0], PDF_ACCENT[1], PDF_ACCENT[2]);
-    const titleLines = wrapText(pdf, obj.code + " · " + obj.title, 180);
-    if (y + titleLines.length * 5 > 275) { pdf.addPage(); y = 20; pdf.setFillColor(255,255,255); pdf.rect(0,0,210,297,'F'); }
-    pdf.text(titleLines, 15, y);
-    y += titleLines.length * 5 + 1;
+    addText(`${obj.code} - ${obj.title}`, 11, 'bold');
+    addText(`Def: ${obj.definition}`, 10);
+    addText(`Dominio: ${obj.domain}  Clase: ${obj.class}`, 9);
+    addText(`Escala: ${obj.scale}`, 9);
+    addText(`Indicadores: ${obj.indicators.join(', ')}`, 9);
+    y += 2;
+  }
 
-    pdf.setFontSize(9);
-    pdf.setFont('helvetica', 'normal');
-    pdf.setTextColor(PDF_GRAY[0], PDF_GRAY[1], PDF_GRAY[2]);
-    const defLines = wrapText(pdf, "Definición: " + obj.definition, 175);
-    if (y + defLines.length * 4 > 275) { pdf.addPage(); y = 20; pdf.setFillColor(255,255,255); pdf.rect(0,0,210,297,'F'); }
-    pdf.text(defLines, 18, y);
-    y += defLines.length * 4 + 1;
-
-    const domLines = wrapText(pdf, "Dominio: " + obj.domain + "  |  Clase: " + obj.class + "  |  Escala: " + obj.scale, 175);
-    if (y + domLines.length * 4 > 275) { pdf.addPage(); y = 20; pdf.setFillColor(255,255,255); pdf.rect(0,0,210,297,'F'); }
-    pdf.text(domLines, 18, y);
-    y += domLines.length * 4 + 1;
-
-    const indLines = wrapText(pdf, "Indicadores: " + obj.indicators.join(", "), 175);
-    if (y + indLines.length * 4 > 275) { pdf.addPage(); y = 20; pdf.setFillColor(255,255,255); pdf.rect(0,0,210,297,'F'); }
-    pdf.text(indLines, 18, y);
-    y += indLines.length * 4 + 2;
-    pdf.setTextColor(PDF_TEXT[0], PDF_TEXT[1], PDF_TEXT[2]);
-  });
-
-  // SECCIÓN INTERVENCIONES
-  pdf.addPage();
-  y = 20;
-  pdf.setFillColor(255,255,255);
-  pdf.rect(0,0,210,297,'F');
-  y = addHeader(pdf, "NANDA · NOC · NIC", "Intervenciones (NIC) completas");
-  y = addSectionTitle(pdf, "INTERVENCIONES NIC (" + Object.keys(NIC).length + ")", y);
-  Object.keys(NIC).forEach(code => {
+  pdf.addPage(); y = 10;
+  addTitle('INTERVENCIONES NIC');
+  for (const code of Object.keys(NIC)) {
     const int = NIC[code];
-    pdf.setFontSize(11);
-    pdf.setFont('helvetica', 'bold');
-    pdf.setTextColor(PDF_ACCENT[0], PDF_ACCENT[1], PDF_ACCENT[2]);
-    const titleLines = wrapText(pdf, int.code + " · " + int.title, 180);
-    if (y + titleLines.length * 5 > 275) { pdf.addPage(); y = 20; pdf.setFillColor(255,255,255); pdf.rect(0,0,210,297,'F'); }
-    pdf.text(titleLines, 15, y);
-    y += titleLines.length * 5 + 1;
-
-    pdf.setFontSize(9);
-    pdf.setFont('helvetica', 'normal');
-    pdf.setTextColor(PDF_GRAY[0], PDF_GRAY[1], PDF_GRAY[2]);
-    const defLines = wrapText(pdf, "Definición: " + int.definition, 175);
-    if (y + defLines.length * 4 > 275) { pdf.addPage(); y = 20; pdf.setFillColor(255,255,255); pdf.rect(0,0,210,297,'F'); }
-    pdf.text(defLines, 18, y);
-    y += defLines.length * 4 + 2;
-
-    if (int.activities && int.activities.length > 0) {
-      pdf.setTextColor(PDF_TEXT[0], PDF_TEXT[1], PDF_TEXT[2]);
-      y = addBulletList(pdf, int.activities, y);
-    }
-    pdf.setTextColor(PDF_TEXT[0], PDF_TEXT[1], PDF_TEXT[2]);
-  });
-
-  const totalPages = pdf.internal.getNumberOfPages();
-  for (let i = 1; i <= totalPages; i++) {
-    pdf.setPage(i);
-    addFooter(pdf, i, totalPages);
+    addText(`${int.code} - ${int.title}`, 11, 'bold');
+    addText(`Def: ${int.definition}`, 10);
+    addText(`Actividades: ${int.activities.join('; ')}`, 9);
+    y += 2;
   }
 
   pdf.save('todos_diagnosticos_objetivos_intervenciones.pdf');
@@ -945,7 +1191,7 @@ document.getElementById('downloadVisibleBtn').addEventListener('click', download
 document.getElementById('downloadAllBtn').addEventListener('click', downloadAllPDF);
 
 // ================================================================
-// TEMA OSCURO / CLARO
+// 6. TEMA OSCURO / CLARO
 // ================================================================
 const themeToggle = document.getElementById('themeToggle');
 let darkMode = false;
@@ -956,7 +1202,7 @@ themeToggle.addEventListener('click', () => {
 });
 
 // ================================================================
-// INICIALIZACIÓN
+// 7. INICIALIZACIÓN
 // ================================================================
 renderDiagnosticList();
 renderRecent();
