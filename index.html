@@ -432,6 +432,208 @@
     .guide-content h1, .guide-content h2 { color: var(--accent); margin-top: 1.5rem; }
     .guide-content ul { padding-left: 1.5rem; }
 
+    /* ----- GENERALIDADES NANDA·NIC·NOC ----- */
+    .guide-content h3 { color: var(--text); margin-top: 1rem; font-size: 1.05rem; }
+    .guide-content .intro-lead { font-size: 1rem; color: var(--text-secondary); margin-bottom: 1rem; }
+    .guide-content hr.sep { border: none; border-top: 1px dashed var(--border); margin: 1.6rem 0; }
+    .guide-content .tax-card {
+      background: var(--accent-light);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 10px;
+      padding: 1.2rem 1.4rem;
+      margin: 1rem 0 1.4rem;
+    }
+    .guide-content .tax-card h2 { margin-top: 0; }
+    .guide-content blockquote {
+      margin: 0.8rem 0;
+      padding: 0.8rem 1.2rem;
+      border-left: 3px solid var(--accent);
+      background: var(--bg);
+      color: var(--text-secondary);
+      font-style: italic;
+      border-radius: 6px;
+    }
+    .guide-content .update-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0.8rem 0 1.2rem;
+      font-size: 0.9rem;
+    }
+    .guide-content .update-table th, .guide-content .update-table td {
+      border: 1px solid var(--border);
+      padding: 0.5rem 0.8rem;
+      text-align: left;
+    }
+    .guide-content .update-table th {
+      background: var(--accent-light);
+      color: var(--text);
+      font-weight: 700;
+    }
+    .guide-content .ref-list { font-size: 0.85rem; color: var(--text-secondary); padding-left: 1.4rem; }
+    .guide-content .ref-list li { margin-bottom: 0.3rem; }
+
+    /* ----- ANEXO 4 (documento de registro) ----- */
+    .anexo-wrapper { display: flex; flex-direction: column; gap: 1.2rem; }
+    .anexo-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.4rem;
+      box-shadow: var(--shadow);
+    }
+    .anexo-toolbar-title { display: flex; align-items: center; gap: 0.9rem; }
+    .anexo-toolbar-title i { font-size: 1.8rem; color: var(--accent); }
+    .anexo-toolbar-title-main { font-weight: 700; font-size: 1.1rem; color: var(--text); }
+    .anexo-toolbar-title-sub { font-size: 0.82rem; color: var(--text-secondary); }
+    .btn-anexo-pdf {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 40px;
+      padding: 0.7rem 1.4rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all var(--transition);
+      box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
+    }
+    .btn-anexo-pdf:hover { filter: brightness(1.08); transform: translateY(-1px); }
+    .btn-anexo-pdf:disabled { opacity: 0.7; cursor: wait; transform: none; }
+
+    .anexo-doc {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 2rem 2.2rem;
+      line-height: 1.55;
+    }
+    .anexo-doc-header {
+      text-align: center;
+      border-bottom: 3px solid var(--accent);
+      padding-bottom: 1rem;
+      margin-bottom: 1.2rem;
+    }
+    .anexo-doc-header .anexo-tag {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.5px;
+      padding: 0.25rem 0.9rem;
+      border-radius: 30px;
+      margin-bottom: 0.6rem;
+    }
+    .anexo-doc-header h1 { font-size: 1.4rem; color: var(--text); font-weight: 700; }
+    .anexo-doc-header .anexo-doc-sub { color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.3rem; }
+
+    .anexo-stage-title {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.6rem 1.1rem;
+      border-radius: 8px;
+      margin: 1.8rem 0 1rem;
+    }
+    .anexo-stage-title:first-of-type { margin-top: 0.6rem; }
+    .anexo-subsection-title {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 0.95rem;
+      margin: 1.2rem 0 0.6rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .anexo-doc table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1rem;
+      font-size: 0.85rem;
+    }
+    .anexo-doc table td, .anexo-doc table th {
+      border: 1px solid var(--border);
+      padding: 0.55rem 0.75rem;
+      vertical-align: top;
+      color: var(--text-secondary);
+    }
+    .anexo-doc table td.label, .anexo-doc table th.label {
+      font-weight: 700;
+      color: var(--text);
+      background: var(--accent-light);
+    }
+    .anexo-doc table tr.section-row td {
+      background: var(--accent-light);
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .anexo-doc table td.blank-field { min-height: 1.6rem; color: var(--text-secondary); }
+    .anexo-domain-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.9rem 1.1rem;
+      margin-bottom: 0.8rem;
+      background: var(--bg);
+    }
+    .anexo-domain-card h4 {
+      color: var(--accent);
+      font-size: 0.92rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .anexo-domain-card p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin: 0.35rem 0;
+    }
+    .anexo-note {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      font-style: italic;
+      margin-top: 0.4rem;
+    }
+    .anexo-doc-footer {
+      margin-top: 1.6rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--border);
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+    }
+    /* Estilo forzado durante la generación del PDF: negrita y alto contraste */
+    .anexo-doc.pdf-mode,
+    .anexo-doc.pdf-mode * {
+      font-weight: 700 !important;
+      color: #12202f !important;
+    }
+    .anexo-doc.pdf-mode { background: #ffffff !important; }
+    .anexo-doc.pdf-mode .anexo-stage-title { color: #ffffff !important; background: #1a73e8 !important; }
+    .anexo-doc.pdf-mode table td.label, .anexo-doc.pdf-mode table th.label,
+    .anexo-doc.pdf-mode table tr.section-row td { background: #e8f0fe !important; }
+    .anexo-doc.pdf-mode table td, .anexo-doc.pdf-mode table th { border-color: #94a3b8 !important; }
+    .anexo-doc.pdf-mode .anexo-domain-card { background: #f8fafc !important; border-color: #94a3b8 !important; }
+
+    @media (max-width: 768px) {
+      .anexo-doc { padding: 1.2rem 1rem; }
+      .anexo-doc table { font-size: 0.72rem; }
+    }
+
     /* FOOTER */
     .app-footer {
       background: var(--footer-bg);
@@ -489,6 +691,8 @@
 <div class="tabs" id="tabContainer">
   <button class="active" data-tab="diagnosticos"><i class="fas fa-stethoscope"></i> Diagnósticos</button>
   <button data-tab="guia"><i class="fas fa-book-open"></i> Guía de uso</button>
+  <button data-tab="generalidades"><i class="fas fa-graduation-cap"></i> Generalidades</button>
+  <button data-tab="anexo4"><i class="fas fa-file-medical"></i> Anexo 4</button>
 </div>
 
 <!-- LAYOUT -->
@@ -546,6 +750,498 @@
         <li>Planes de Cuidados Enfermeros en Procesos Asistenciales Integrados. Consejería de Salud, Sevilla 2004.</li>
       </ul>
       <p style="margin-top:1rem; color:var(--text-secondary);"><i class="fas fa-database"></i> Datos cargados: <span id="dataVersion">v3.1 (87 diagnósticos, 153 objetivos, 175 intervenciones)</span></p>
+    </div>
+
+    <!-- Generalidades de las Taxonomías NANDA, NIC y NOC (oculta por defecto) -->
+    <div id="generalidadesContent" style="display:none;" class="guide-content">
+      <h1><i class="fas fa-graduation-cap"></i> Generalidades de las Taxonomías NANDA, NIC y NOC</h1>
+
+      <h2>Introducción</h2>
+      <p class="intro-lead">En el ámbito de la enfermería, la estandarización del lenguaje profesional constituye un pilar fundamental para garantizar la calidad, continuidad y efectividad de los cuidados. Las taxonomías <strong>NANDA-I</strong> (Diagnósticos de Enfermería), <strong>NIC</strong> (Clasificación de Intervenciones de Enfermería) y <strong>NOC</strong> (Clasificación de Resultados de Enfermería) conforman un sistema integrado de lenguajes estandarizados que permite describir, planificar, ejecutar y evaluar la práctica enfermera de manera sistemática y basada en la evidencia.</p>
+      <p>Estas tres clasificaciones, reconocidas por la <strong>American Nurses Association (ANA)</strong> e incluidas en el <strong>Unified Medical Language System (UMLS)</strong> de la Biblioteca Nacional de Medicina de EE.UU., constituyen el fundamento del proceso enfermero en la práctica, la docencia y la investigación. Su implementación conjunta, conocida como <strong>NNN</strong>, ha incrementado la capacidad práctica y la eficacia en el tratamiento de los datos de enfermería.</p>
+
+      <hr class="sep">
+
+      <div class="tax-card">
+        <h2><i class="fas fa-notes-medical"></i> 1. NANDA Internacional (NANDA-I): Diagnósticos de Enfermería</h2>
+        <h3>Definición y origen</h3>
+        <p>La <em>North American Nursing Diagnosis Association</em> (NANDA), hoy <strong>NANDA International (NANDA-I)</strong>, es una organización fundada en 1982 con el objetivo de definir, desarrollar y promover una terminología propia y estandarizada para los juicios clínicos enfermeros. Su trabajo ha dado lugar a la clasificación de diagnósticos de enfermería más extendida a nivel mundial.</p>
+        <h3>Concepto de diagnóstico enfermero</h3>
+        <p>NANDA-I define el diagnóstico de enfermería como:</p>
+        <blockquote>"Un juicio clínico sobre las respuestas de un individuo, familia o comunidad a problemas de salud o procesos vitales reales o potenciales. Un diagnóstico de enfermería proporciona la base para seleccionar las intervenciones de enfermería que permiten alcanzar los resultados de los cuales el profesional enfermero es responsable".</blockquote>
+        <h3>Estructura taxonómica</h3>
+        <p>La Taxonomía II de NANDA-I organiza los diagnósticos en una estructura jerárquica que consta de:</p>
+        <ul>
+          <li><strong>7 ejes</strong> que permiten clasificar y describir los diagnósticos desde diferentes perspectivas: foco del diagnóstico, sujeto del diagnóstico, juicio, etc.</li>
+          <li><strong>Dominios y clases</strong> que agrupan los diagnósticos por áreas de contenido.</li>
+        </ul>
+        <p>Cada diagnóstico incluye: <strong>etiqueta</strong> (nombre del diagnóstico), <strong>definición</strong>, <strong>características definitorias</strong> (signos y síntomas) y <strong>factores relacionados o factores de riesgo</strong>.</p>
+        <h3>Tipos de diagnósticos</h3>
+        <ul>
+          <li><strong>Diagnóstico real:</strong> describe una respuesta existente, con etiqueta, definición, características definitorias y factores relacionados.</li>
+          <li><strong>Diagnóstico de riesgo:</strong> describe una vulnerabilidad a desarrollar un problema, con etiqueta, definición y factores de riesgo.</li>
+        </ul>
+        <h3>Actualizaciones</h3>
+        <p>La <strong>13.ª edición (2024-2026)</strong> de <em>NANDA International Nursing Diagnoses: Definitions and Classification</em> incluye <strong>56 nuevos diagnósticos</strong> y la retirada de <strong>46</strong>, reflejando la continua evolución del conocimiento enfermero. Actualmente, NANDA-I forma parte de <strong>NANDA 360</strong>, una plataforma integrada que unifica el proceso enfermero dentro de un marco de razonamiento clínico.</p>
+      </div>
+
+      <div class="tax-card">
+        <h2><i class="fas fa-tasks"></i> 2. NIC: Clasificación de Intervenciones de Enfermería</h2>
+        <h3>Definición y origen</h3>
+        <p>La <em>Nursing Interventions Classification</em> (NIC) es una clasificación integral, basada en la investigación y estandarizada, de las intervenciones que realizan los profesionales de enfermería. Fue desarrollada por un equipo de investigación de la <strong>Universidad de Iowa</strong> y publicada por primera vez en <strong>1992</strong>.</p>
+        <h3>Concepto de intervención enfermera</h3>
+        <p>La NIC define una intervención como:</p>
+        <blockquote>"Cualquier tratamiento, basado en el juicio clínico y el conocimiento, que una enfermera realiza para mejorar los resultados del paciente/cliente".</blockquote>
+        <h3>Estructura taxonómica</h3>
+        <p>La NIC organiza las intervenciones en una estructura jerárquica que facilita su uso:</p>
+        <ul>
+          <li><strong>7 dominios:</strong> Fisiológico: Básico, Fisiológico: Complejo, Conductual, Seguridad, Familiar, Sistema Sanitario y Comunidad.</li>
+          <li><strong>30 clases</strong> que agrupan intervenciones afines.</li>
+          <li><strong>614 intervenciones</strong> en la 8.ª edición (2024), con más de <strong>13.500 actividades</strong> de enfermería.</li>
+        </ul>
+        <p>Cada intervención incluye: <strong>etiqueta</strong> (nombre), <strong>definición</strong>, conjunto de <strong>actividades</strong> para su ejecución y <strong>referencias</strong> basadas en la evidencia.</p>
+        <h3>Ámbito de aplicación</h3>
+        <p>Las intervenciones NIC abarcan:</p>
+        <ul>
+          <li>Cuidados fisiológicos (ej. manejo del equilibrio ácido-base) y psicosociales (ej. reducción de la ansiedad).</li>
+          <li>Tratamiento de enfermedades, prevención y promoción de la salud.</li>
+          <li>Intervenciones para individuos, familias y comunidades.</li>
+          <li>Cuidados directos e indirectos.</li>
+        </ul>
+        <p>La NIC es útil en todos los entornos asistenciales: desde unidades de cuidados intensivos hasta atención primaria, cuidados paliativos y atención domiciliaria.</p>
+        <h3>Actualizaciones</h3>
+        <p>La <strong>8.ª edición (2024)</strong> incorpora <strong>60 nuevas intervenciones</strong> y retira <strong>11</strong>, con modificaciones en las etiquetas de otras existentes.</p>
+      </div>
+
+      <div class="tax-card">
+        <h2><i class="fas fa-bullseye"></i> 3. NOC: Clasificación de Resultados de Enfermería</h2>
+        <h3>Definición y origen</h3>
+        <p>La <em>Nursing Outcomes Classification</em> (NOC) es una clasificación integral, basada en la investigación y estandarizada, de los resultados sensibles a la práctica enfermera que se espera obtener como consecuencia de las intervenciones de enfermería. Fue publicada por primera vez en <strong>1997</strong>.</p>
+        <h3>Concepto de resultado enfermero</h3>
+        <p>La NOC proporciona una terminología estandarizada para conceptualizar, denominar, validar y clasificar los resultados que se obtienen de la intervención de enfermería. Estos resultados son medibles y permiten evaluar la efectividad de los cuidados.</p>
+        <h3>Estructura taxonómica</h3>
+        <p>La NOC organiza los resultados en:</p>
+        <ul>
+          <li><strong>6 dominios:</strong> Salud Funcional, Salud Fisiológica, Salud Psicosocial, Conocimientos y Conductas sobre Salud, Salud Percibida, Salud Familiar y Comunitaria.</li>
+          <li><strong>24 clases</strong> que agrupan resultados afines.</li>
+        </ul>
+        <p>La <strong>7.ª edición (2024)</strong> incluye <strong>612 resultados</strong> sensibles a la práctica enfermera, con más de <strong>11.500 indicadores</strong> que utilizan escalas Likert de 5 puntos para evaluar la efectividad de las intervenciones. Cada resultado cuenta con una definición, indicadores y escalas de medición.</p>
+        <h3>Actualizaciones</h3>
+        <p>La 7.ª edición incorpora <strong>82 nuevos resultados</strong> y retira <strong>10</strong>, con modificaciones en las etiquetas de otros existentes.</p>
+      </div>
+
+      <h2><i class="fas fa-link"></i> 4. Interrelación NANDA, NIC y NOC: El sistema NNN</h2>
+      <h3>Un lenguaje integrado para el proceso enfermero</h3>
+      <p>Las tres clasificaciones están diseñadas para utilizarse de forma conjunta, formando un sistema integrado que cubre todo el proceso enfermero:</p>
+      <ol>
+        <li><strong>NANDA-I</strong> → identifica el problema (diagnóstico de enfermería)</li>
+        <li><strong>NOC</strong> → establece los resultados esperados (objetivos)</li>
+        <li><strong>NIC</strong> → determina las intervenciones para alcanzar esos resultados</li>
+      </ol>
+      <p>Esta interrelación permite vincular directamente el problema detectado con los aspectos específicos que se desean modificar y las acciones necesarias para lograrlo.</p>
+      <h3>Beneficios de la implementación conjunta</h3>
+      <p>La utilización integrada de las taxonomías NNN proporciona múltiples ventajas:</p>
+      <ul>
+        <li>Unificación y normalización del lenguaje enfermero a nivel internacional.</li>
+        <li>Mejora de la comunicación entre profesionales y en la documentación clínica.</li>
+        <li>Facilitación de la investigación al proporcionar información sistematizada y normalizada.</li>
+        <li>Evaluación de la efectividad de los cuidados y su contribución a la solución de problemas.</li>
+        <li>Gestión de recursos (personal, material) y cuantificación de la productividad.</li>
+        <li>Diseño curricular en la formación de pregrado y posgrado.</li>
+        <li>Integración en sistemas electrónicos de documentación y planificación de cuidados.</li>
+      </ul>
+      <h3>Reconocimiento institucional</h3>
+      <p>Las tres clasificaciones:</p>
+      <ul>
+        <li>Están reconocidas por la American Nurses Association (ANA).</li>
+        <li>Están incluidas en el Unified Medical Language System (UMLS) de la Biblioteca Nacional de Medicina.</li>
+        <li>Se utilizan internacionalmente en hospitales, centros ambulatorios, rehabilitación y cuidados de larga duración.</li>
+        <li>Están traducidas a múltiples idiomas, incluyendo español, y han sido presentadas en más de 24 países.</li>
+      </ul>
+
+      <h2><i class="fas fa-rotate"></i> 5. Actualizaciones recientes (2024-2025)</h2>
+      <table class="update-table">
+        <thead>
+          <tr><th>Taxonomía</th><th>Edición</th><th>Novedades</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>NANDA-I</strong></td><td>13.ª (2024-2026)</td><td>56 nuevos diagnósticos, 46 retirados</td></tr>
+          <tr><td><strong>NIC</strong></td><td>8.ª (2024)</td><td>60 nuevas intervenciones, 11 retiradas</td></tr>
+          <tr><td><strong>NOC</strong></td><td>7.ª (2024)</td><td>82 nuevos resultados, 10 retirados</td></tr>
+        </tbody>
+      </table>
+      <p>Estas actualizaciones reflejan el compromiso continuo de las organizaciones responsables con la investigación y la mejora constante de los lenguajes enfermeros, adaptándolos a la evolución de la práctica clínica.</p>
+
+      <hr class="sep">
+
+      <h2><i class="fas fa-flag-checkered"></i> Conclusión</h2>
+      <p>Las taxonomías NANDA-I, NIC y NOC constituyen un sistema de lenguajes estandarizados que ha transformado la práctica enfermera, proporcionando una base sólida y común para el diagnóstico, la planificación, la ejecución y la evaluación de los cuidados. Su utilización conjunta no solo mejora la calidad y seguridad de la atención, sino que también visibiliza el valor de la contribución enfermera a los resultados de salud, fortaleciendo la identidad profesional y el desarrollo disciplinar.</p>
+      <p>La implementación de estas clasificaciones en la práctica clínica, la docencia y la investigación representa un avance significativo para la profesión enfermera, facilitando el pensamiento crítico, la toma de decisiones basada en la evidencia y la mejora continua de los cuidados.</p>
+
+      <h2><i class="fas fa-book"></i> Referencias</h2>
+      <ol class="ref-list">
+        <li>Elsevier Connect. (2022). NANDA-I, NIC, NOC: uso en la planificación de los cuidados y el modelo AREA.</li>
+        <li>Universidad de Iowa, Center for Nursing Classification and Clinical Effectiveness. NIC Overview.</li>
+        <li>Universidad de Iowa, Center for Nursing Classification and Clinical Effectiveness. NIC &amp; NOC Fact Sheet.</li>
+        <li>Biblioteca Virtual Murciasalud. (2025). Nuevas ediciones de NANDA-I, NIC y NOC.</li>
+        <li>Dialnet. Descripción y análisis de las clasificaciones NANDA, NOC y NIC.</li>
+        <li>NANDA International. (2024). NANDA International Nursing Diagnoses: Definitions and Classification, 2024-2026 Edition.</li>
+        <li>Gayosso Islas, E., et al. (2014). Plan de cuidados de enfermería con las taxonomías: NANDA, NOC y NIC.</li>
+      </ol>
+    </div>
+
+    <!-- ANEXO 4 · Formato de Modelo Registro (oculto por defecto) -->
+    <div id="anexo4Content" style="display:none;" class="anexo-wrapper">
+      <div class="anexo-toolbar">
+        <div class="anexo-toolbar-title">
+          <i class="fas fa-file-medical"></i>
+          <div>
+            <div class="anexo-toolbar-title-main">Anexo 4 · Formato de Modelo Registro</div>
+            <div class="anexo-toolbar-title-sub">Plan de Cuidados de Enfermería — Proceso de Atención de Enfermería (PAE)</div>
+          </div>
+        </div>
+        <button id="downloadAnexo4Btn" class="btn-anexo-pdf"><i class="fas fa-file-pdf"></i> Descargar Anexo 4 en PDF</button>
+      </div>
+
+      <div class="anexo-doc" id="anexo4Printable">
+        <div class="anexo-doc-header">
+          <span class="anexo-tag">ANEXO 4</span>
+          <h1>Formato de Modelo Registro</h1>
+          <div class="anexo-doc-sub">Hospital Militar Dr. Joaquín Castillo Duany · Registro del Proceso de Atención de Enfermería</div>
+        </div>
+
+        <table>
+          <tbody>
+            <tr>
+              <td class="label">Nombre de estudiante:</td>
+              <td class="blank-field">&nbsp;</td>
+              <td class="label">Semestre:</td>
+            </tr>
+            <tr>
+              <td class="label">Sitio de práctica:</td>
+              <td colspan="2" class="blank-field">&nbsp;</td>
+            </tr>
+            <tr>
+              <td class="label">Profesor:</td>
+              <td class="label">Fecha de inicio del plan de cuidados:</td>
+              <td class="blank-field">&nbsp;</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- ============ 1. ETAPA DE VALORACIÓN ============ -->
+        <div class="anexo-stage-title"><i class="fas fa-clipboard-list"></i> 1 - ETAPA DE VALORACIÓN</div>
+        <p>Valoración general del paciente del día que se confecciona el proceso, reflejando los datos subjetivos y objetivos.</p>
+
+        <div class="anexo-subsection-title">1.1 Datos de identificación del paciente</div>
+        <table>
+          <tbody>
+            <tr><td class="label">Institución:</td><td class="label">Servicio:</td><td class="label">Cama:</td></tr>
+            <tr><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td></tr>
+            <tr><td class="label">Nombre del paciente (Iniciales):</td><td class="label">Género:</td><td class="label">Edad:</td></tr>
+            <tr><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td></tr>
+            <tr><td class="label">Nivel de escolaridad:</td><td class="label" colspan="2">Ocupación:</td></tr>
+            <tr><td class="blank-field">&nbsp;</td><td class="blank-field" colspan="2">&nbsp;</td></tr>
+            <tr><td class="label" colspan="3">Domicilio:</td></tr>
+            <tr><td class="blank-field" colspan="3">&nbsp;</td></tr>
+          </tbody>
+        </table>
+
+        <div class="anexo-subsection-title">1.2 Antecedentes</div>
+        <table>
+          <tbody>
+            <tr><td class="label">Antecedentes familiares:</td></tr>
+            <tr><td class="blank-field">&nbsp;</td></tr>
+            <tr><td class="label">Antecedentes personales:</td></tr>
+            <tr><td class="blank-field">&nbsp;</td></tr>
+            <tr><td class="label">Motivo de consulta y/o visita domiciliaria:</td></tr>
+            <tr><td class="blank-field">&nbsp;</td></tr>
+          </tbody>
+        </table>
+
+        <div class="anexo-subsection-title">1.3 Valoración física</div>
+        <table>
+          <tbody>
+            <tr><td class="label" colspan="6">Estado de conciencia:</td></tr>
+            <tr><td class="blank-field" colspan="6">&nbsp;</td></tr>
+            <tr><td class="label" colspan="6">Estado de orientación:</td></tr>
+            <tr><td class="blank-field" colspan="6">&nbsp;</td></tr>
+            <tr><td class="label" colspan="6">Biotipo: Normolíneo ( )&nbsp;&nbsp;&nbsp;Brevilíneo ( )&nbsp;&nbsp;&nbsp;Longilíneo ( )</td></tr>
+            <tr><td class="label" colspan="6">Facies:</td></tr>
+            <tr><td class="blank-field" colspan="6">&nbsp;</td></tr>
+            <tr><td class="label" colspan="6">Actitud o postura:</td></tr>
+            <tr><td class="blank-field" colspan="6">&nbsp;</td></tr>
+            <tr><td class="label" colspan="6">Deambulación o marcha:</td></tr>
+            <tr><td class="blank-field" colspan="6">&nbsp;</td></tr>
+            <tr><td class="label" colspan="6">Piel:</td></tr>
+            <tr><td class="blank-field" colspan="6">&nbsp;</td></tr>
+            <tr><td class="label" colspan="6">Mucosas:</td></tr>
+            <tr><td class="blank-field" colspan="6">&nbsp;</td></tr>
+            <tr><td class="label" colspan="6">Pelo:</td></tr>
+            <tr><td class="blank-field" colspan="6">&nbsp;</td></tr>
+            <tr><td class="label" colspan="6">Uña:</td></tr>
+            <tr><td class="blank-field" colspan="6">&nbsp;</td></tr>
+            <tr><td class="label" colspan="6">Tejido celular subcutáneo (TCS):</td></tr>
+            <tr><td class="blank-field" colspan="6">&nbsp;</td></tr>
+            <tr><td class="label" colspan="6">Panículo adiposo:</td></tr>
+            <tr><td class="blank-field" colspan="6">&nbsp;</td></tr>
+            <tr>
+              <td class="label">Signos vitales:</td><td class="label">FR:</td><td class="label">T°:</td><td class="label">TA:</td><td class="label">FC:</td><td class="label">FCF:</td>
+            </tr>
+            <tr>
+              <td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td>
+            </tr>
+            <tr>
+              <td class="label">Medidas antropométricas:</td><td class="label">Peso:</td><td class="label">Talla:</td><td class="label" colspan="3">IMC:</td>
+            </tr>
+            <tr>
+              <td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td><td class="blank-field" colspan="3">&nbsp;</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="anexo-subsection-title">1.5 Valoración por dominios</div>
+        <p class="anexo-note">Se completa el dominio o los dominios afectados a partir de los datos recogidos en la valoración; cada casilla ( &nbsp;) se marca según corresponda al estado del paciente.</p>
+
+        <div class="anexo-domain-card">
+          <h4><i class="fas fa-heartbeat"></i> Dominio 1: Promoción de la Salud</h4>
+          <p>Condición general de salud actual: Buena ( )  Regular ( )  Mala ( )  · En el último año: Buena ( )  Regular ( )  Mala ( )</p>
+          <p>Enfermedades que padece: ______________________________________________</p>
+          <p>Conoce sobre su enfermedad: (Sí) (No) · Hábitos nocivos — Alcohol: (Sí) (No)  Tabaco: (Sí) (No)  Drogas: (Sí) (No)</p>
+          <p>Medicación que toma: ______________________________________________</p>
+          <p>Última consulta: Asistió (Sí) (No) · Inmunizaciones: (Sí) (No)</p>
+          <p>Cuidador requiere educación sanitaria: (Sí) (No) · Hábitos higiénicos personales: Buenos ( )  Regulares ( )  Malos ( )</p>
+        </div>
+
+        <div class="anexo-domain-card">
+          <h4><i class="fas fa-apple-alt"></i> Dominio 2: Nutrición</h4>
+          <p>Ingesta diaria: N.° de comidas ( ) · Hábitos alimenticios: Dieta sana ( )  Dieta no sana ( ) · Mucosa oral: Intacta ( )  Lesiones ( )</p>
+          <p>Dentición: Completa ( )  Incompleta ( )  Prótesis ( ) · Apetito: Disminuido ( )  Normal ( )  Aumentado ( )</p>
+          <p>Dieta actual: ____________ · Vía: Normal ( )  SNG ( )  Gastrostomía ( )  Yeyunostomía ( )  Catéter subclavio ( )  Otro: ____</p>
+          <p>Presencia de: Diarrea ( )  Náuseas ( )  Vómitos ( )  Reflujo ( )  Polifagia ( )  Polidipsia ( )  Dolor abdominal ( )  Hepatomegalia ( )</p>
+          <p>Hematemesis ( )  Palidez de mucosa ( )  Mucosas secas ( )  Piel seca ( )  Alteración de la turgencia de la piel ( )  Edema ( )</p>
+          <p>Anasarca ( )  Anorexia ( )  Bulimia ( )  IMC &gt; 30 Kg/m² ( )  IMC &lt; 25 Kg/m² ( )</p>
+        </div>
+
+        <div class="anexo-domain-card">
+          <h4><i class="fas fa-tint"></i> Dominio 3: Eliminación</h4>
+          <p>Sistema de eliminación: Normal ( )  Pañal ( )  Colector urinario ( )  Sonda ( )  Ostomía ( ) · Hábitos vesicales: Normal ( )  Oliguria ( )</p>
+          <p>Disuria ( )  Anuria ( )  Nicturia ( )  Polaquiuria ( )  Poliuria ( )  Hematuria ( )  Tenesmo vesical ( )  Retención ( )  Urgencia ( )  Incontinencia ( )</p>
+          <p>Hábitos intestinales: Régimen normal ( )  Estreñimiento ( ) · Presencia de: Peristaltismo ( )  Distensión abdominal ( )  Incontinencia ( )</p>
+          <p>Flatulencias ( )  Diarrea ( )  Melena ( )  Dolor ( )  Fisuras ( )  Hemorroides ( )</p>
+        </div>
+
+        <div class="anexo-domain-card">
+          <h4><i class="fas fa-running"></i> Dominio 4: Actividad/Reposo</h4>
+          <p>Hábitos de actividad y ejercicio: Activo ( )  Sedentario ( ) · Reposo: Horas de sueño ( )  Pesadillas ( )  Insomnio ( )</p>
+          <p>Movilidad: Normal ( )  Limitada ( ) · Ambulación: Por sí solo ( )  Asistida ( )  Con ayuda técnica ( ) · Tipo de marcha: ____________</p>
+          <p>Presencia de: Alteración de la concentración ( )  Irritabilidad ( )  Ansiedad ( ) · Fractura: ( )  Parálisis ( )  Hemiparesia ( D ) ( I )</p>
+          <p>Respiración: Espontánea ( )  Oxigenoterapia ( )  Ventilación mecánica ( ) · Presencia de: Eupnea ( )  Taquipnea ( )  Apnea ( )</p>
+          <p>Ortopnea ( )  Bradipnea ( )  Polipnea ( )  Disnea ( ) · Pulso: Normal ( )  Taquicardia ( )  Bradicardia ( )  Arritmia ( )</p>
+        </div>
+
+        <div class="anexo-domain-card">
+          <h4><i class="fas fa-brain"></i> Dominio 5: Percepción/Cognición</h4>
+          <p>Nivel de conciencia: Alerta ( )  Somnolencia ( )  Estupor ( )  Coma ( ) · Deterioro de memoria: Corto plazo ( )  Mediano plazo ( )  Largo plazo ( )</p>
+          <p>Falta de orientación: P ( )  T ( )  L ( ) · Deterioro del pensamiento: Sí ( )  No ( ) · Lenguaje: Normal ( )  Afasia ( )  Disartria ( )</p>
+          <p>Deterioro sensorial: Ninguno ( )  Visual ( )  Auditivo ( )  Gustativo ( )  Olfatorio ( )  Táctil ( )  Cenestésico ( )</p>
+          <p>Presencia de: Enfermedad neurológica ( )  Cefalea ( )  Vértigos ( )  Paresias ( )  Alucinaciones ( )  Cambios de estado de ánimo ( )</p>
+        </div>
+
+        <div class="anexo-domain-card">
+          <h4><i class="fas fa-user"></i> Dominio 6: Autopercepción</h4>
+          <p>Descripción de sí mismo: ______________________________________________</p>
+          <p>Se siente a gusto consigo mismo: (Sí) (No) · Sensación de fracaso: Familiar ( )  Laboral ( )  Personal ( )</p>
+          <p>Labilidad emocional: Llanto ( )  Tristeza ( )  Pérdida de una parte del cuerpo ( )</p>
+        </div>
+
+        <div class="anexo-domain-card">
+          <h4><i class="fas fa-people-roof"></i> Dominio 7: Rol/Relaciones</h4>
+          <p>Vive con: Solo ( )  Familia ( )  Otros ( ) · En su familia usted es: Cuidador ( )  Proveedor de recursos ( )  Orientador del hogar ( )</p>
+          <p>Relación con la familia: (Afectiva) (Indiferente) (Hostil) · Relación con otros: (Afectiva) (Indiferente) (Hostil)</p>
+          <p>Comunicación: Sabe leer: (Sí) (No)  Sabe escribir: (Sí) (No) · Problemas familiares: No ( )  Alcoholismo ( )  Pandillaje ( )  Drogadicción ( )  Abandono social ( )  Pobreza extrema ( )</p>
+        </div>
+
+        <div class="anexo-domain-card">
+          <h4><i class="fas fa-venus-mars"></i> Dominio 8: Sexualidad</h4>
+          <p>Estado civil: Soltero ( )  Casado ( )  Separado ( )  Viudo ( )  Conviviente ( ) · N.° hijos: ( ) · Vida sexual activa: (Sí) (No)</p>
+          <p>ITS (Sí) (No) · Uso de método anticonceptivo: (Sí) (No)  ¿Cuál? __________ · Problema de identidad sexual: (Sí) (No)</p>
+          <p>Felicidad conyugal: (Sí) (No) · Presencia de: Alteración en la actividad sexual ( )  Insatisfacción ( )  Signos de abuso ( )</p>
+          <p>Gestantes: Controles prenatales (Sí) (No)  Embarazo no deseado (Sí) (No)  Embarazo de alto riesgo (Sí) (No)</p>
+        </div>
+
+        <div class="anexo-domain-card">
+          <h4><i class="fas fa-face-flushed"></i> Dominio 9: Afrontamiento y Tolerancia al Estrés</h4>
+          <p>Presencia de cambios importantes (crisis) en su vida en los últimos 2 años: (Sí) (No) · Intento de suicidio: (Sí) (No) · N.° veces ( )</p>
+          <p>Las situaciones difíciles las enfrenta con: Ansiedad ( )  Miedo ( )  Inseguridad ( )  Llanto ( )  Fortaleza ( )  Decisión ( )</p>
+          <p>Negación ( ) · Cuando está preocupado usted acude a: Familiar ( )  Amigo ( )  Pareja ( )  Otro ( )</p>
+          <p>En momentos difíciles usted: Consume alcohol ( )  Droga ( )  Se vuelve agresivo ( )  Irritable ( )  Impaciente ( )  Se aísla ( )</p>
+          <p>Adaptación al medio hospitalario: (Sí) (No) · Aceptación del tratamiento: (Sí) (No) · Miedo excesivo a procedimientos: (Sí) (No)</p>
+        </div>
+
+        <div class="anexo-domain-card">
+          <h4><i class="fas fa-hands-praying"></i> Dominio 10: Principios Vitales</h4>
+          <p>Profesa alguna religión: (Sí) (No)  ¿Cuál? __________ · La religión es importante en su vida: (Sí) (No)</p>
+          <p>Le ayuda a superar problemas: (Sí) (No) · Tiene planes y esperanzas para el futuro: (Sí) (No) · Solicita apoyo espiritual: (Sí) (No)</p>
+          <p>¿Qué valores practica? __________ · Tiene dificultad para tomar decisiones: (Sí) (No)</p>
+          <p>Relaciona su enfermedad con sus creencias: (Sí) (No) · Sus creencias interfieren con su tratamiento: (Sí) (No)</p>
+        </div>
+
+        <div class="anexo-domain-card">
+          <h4><i class="fas fa-shield-halved"></i> Dominio 11: Seguridad y Protección</h4>
+          <p>Piel: Turgente ( )  Pálida ( )  Diaforética ( )  Seca ( )  Fría ( )  Caliente ( )  Ictérica ( )  Cianótica ( ) · Edemas: Fóvea (+) (++) (+++)</p>
+          <p>Lesiones en mucosas ( )  Heridas ( )  Problemas de cicatrización ( ) · UPP: Antigua ( )  Nueva ( )  Grado: (I) (II) (III) (IV)</p>
+          <p>Tipo de herida: Cerrada ( )  Abierta ( )  Contaminada ( )  Limpia ( ) · Secreción: Serosa ( )  Sanguinolenta ( )  Purulenta ( )</p>
+          <p>Requiere: Dispositivos antiescaras ( )  Sujeciones o cinturón de seguridad ( )  Cama con barandas ( )  Familiar permanente ( )</p>
+          <p>Antecedentes: Caídas ( )  Desmayos ( )  Convulsiones ( )  Asfixia por líquidos ( )  Atragantamiento ( )  Fracturas ( )</p>
+        </div>
+
+        <div class="anexo-domain-card">
+          <h4><i class="fas fa-couch"></i> Dominio 12: Confort</h4>
+          <p>Dolor: (Sí) (No) · Escala EVA: 1 - 2 - 3 - 4 - 5 - 6 - 7 - 8 - 9 - 10 · Localización: __________</p>
+          <p>Tipo: Agudo ( )  Crónico ( )  Difuso ( )  Continuo ( )  Intermitente ( )  Punzante ( )  Compresivo ( )  Localizado ( )  Irradiado ( )</p>
+          <p>Situaciones que aumentan el dolor: __________</p>
+          <p>Situaciones que lo disminuyen: __________</p>
+          <p>Tratamiento utilizado y su efectividad: __________</p>
+          <p>Presencia de náuseas: (Sí) (No) · Presencia de vómitos: (Sí) (No) · Se siente solo con frecuencia: (Sí) (No)</p>
+          <p>Cree que los demás lo rechazan: (Sí) (No)</p>
+        </div>
+
+        <div class="anexo-domain-card">
+          <h4><i class="fas fa-child-reaching"></i> Dominio 13: Crecimiento y Desarrollo</h4>
+          <p>Crecimiento: Edad del niño: ____ Peso: ____ Talla: ____ · Congruencia entre edad, peso y talla: (Sí) (No)</p>
+          <p>Desnutrición: (Sí) (No) · Aumento de peso anormal: (Sí) (No) · Pérdida de peso anormal: (Sí) (No) · Anemia: (Sí) (No)</p>
+          <p>Prematuridad: (Sí) (No) · Enfermedad crónica: (Sí) (No) · Trastorno congénito: (Sí) (No)</p>
+          <p>Desarrollo — Problemas en el crecimiento: (Sí) (No) · Dificultad para realizar actividades: Motoras ( )  Sociales ( )  Expresivas ( )</p>
+          <p>Inscrito a programa de crecimiento y desarrollo: (Sí) (No) · ¿Quién cuida al niño? __________</p>
+        </div>
+
+        <div class="anexo-subsection-title">1.6 Valoración familiar</div>
+        <table>
+          <tbody>
+            <tr><td class="label">Completar el instrumento de valoración familiar si procede (Apgar familiar, Ecomapa, Familiograma).</td></tr>
+            <tr><td class="blank-field">&nbsp;</td></tr>
+          </tbody>
+        </table>
+
+        <div class="anexo-subsection-title">1.7 Datos clínicos</div>
+        <table>
+          <tbody>
+            <tr><td class="label">Fecha de ingreso:</td><td class="label">Diagnóstico médico:</td></tr>
+            <tr><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td></tr>
+            <tr><td class="label" colspan="2">Ayudas diagnósticas:</td></tr>
+            <tr><td class="blank-field" colspan="2">&nbsp;</td></tr>
+            <tr><td class="label" colspan="2">Tratamiento médico:</td></tr>
+            <tr><td class="blank-field" colspan="2">&nbsp;</td></tr>
+            <tr><td class="label" colspan="2">Breve descripción de la patología:</td></tr>
+            <tr><td class="blank-field" colspan="2">&nbsp;</td></tr>
+          </tbody>
+        </table>
+
+        <!-- ============ 2. ETAPA DE DIAGNÓSTICO ============ -->
+        <div class="anexo-stage-title"><i class="fas fa-stethoscope"></i> 2 - ETAPA DE DIAGNÓSTICO</div>
+        <div class="anexo-subsection-title">2.1 Diagnóstico de Enfermería</div>
+        <table>
+          <tbody>
+            <tr><td class="label">Dominio:</td></tr>
+            <tr><td class="blank-field">&nbsp;</td></tr>
+            <tr><td class="label">Datos claves:</td></tr>
+            <tr><td class="blank-field">&nbsp;</td></tr>
+            <tr><td class="label">Diagnóstico NANDA:</td></tr>
+            <tr><td class="blank-field">&nbsp;</td></tr>
+          </tbody>
+        </table>
+
+        <!-- ============ 3. ETAPA DE PLANIFICACIÓN ============ -->
+        <div class="anexo-stage-title"><i class="fas fa-list-check"></i> 3 - ETAPA DE PLANIFICACIÓN</div>
+        <div class="anexo-subsection-title">3.1 Objetivo de Enfermería</div>
+        <table>
+          <tbody>
+            <tr><td class="label" colspan="4">Resultado NOC:</td></tr>
+            <tr><td class="blank-field" colspan="4">&nbsp;</td></tr>
+            <tr>
+              <td class="label" rowspan="2">Indicadores NOC:</td>
+              <td class="label" colspan="2">Puntuación diana</td>
+              <td class="label" rowspan="2">Escala de medición:</td>
+            </tr>
+            <tr>
+              <td class="label">Mantener</td>
+              <td class="label">Elevar</td>
+            </tr>
+            <tr><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td></tr>
+            <tr><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td></tr>
+            <tr><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td></tr>
+          </tbody>
+        </table>
+
+        <div class="anexo-subsection-title">3.2 Intervenciones de Enfermería (NIC)</div>
+        <table>
+          <tbody>
+            <tr>
+              <td class="label" colspan="2">Intervención 1:</td>
+              <td class="label" colspan="2">Intervención 2:</td>
+            </tr>
+            <tr>
+              <td class="blank-field" colspan="2">&nbsp;</td>
+              <td class="blank-field" colspan="2">&nbsp;</td>
+            </tr>
+            <tr>
+              <td class="label" colspan="2">Actividades principales:</td>
+              <td class="label" colspan="2">Actividades principales:</td>
+            </tr>
+            <tr>
+              <td class="blank-field" colspan="2">&nbsp;</td>
+              <td class="blank-field" colspan="2">&nbsp;</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- ============ 4. ETAPA DE INTERVENCIÓN ============ -->
+        <div class="anexo-stage-title"><i class="fas fa-hand-holding-medical"></i> 4 - ETAPA DE INTERVENCIÓN</div>
+        <div class="anexo-subsection-title">4.1 Reporte de las intervenciones de enfermería</div>
+        <table>
+          <thead>
+            <tr>
+              <th class="label">Actividades realizadas</th>
+              <th class="label">Fecha</th>
+              <th class="label">Logros</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td></tr>
+            <tr><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td></tr>
+            <tr><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td></tr>
+          </tbody>
+        </table>
+
+        <!-- ============ 5. ETAPA DE EVALUACIÓN ============ -->
+        <div class="anexo-stage-title"><i class="fas fa-clipboard-check"></i> 5 - ETAPA DE EVALUACIÓN</div>
+        <table>
+          <tbody>
+            <tr><td class="label" colspan="3">Resultado NOC:</td></tr>
+            <tr><td class="blank-field" colspan="3">&nbsp;</td></tr>
+          </tbody>
+        </table>
+        <table>
+          <thead>
+            <tr>
+              <th class="label">Indicadores de resultados</th>
+              <th class="label">Puntuación</th>
+              <th class="label">Resultado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td></tr>
+            <tr><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td></tr>
+            <tr><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td></tr>
+            <tr><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td><td class="blank-field">&nbsp;</td></tr>
+          </tbody>
+        </table>
+
+        <div class="anexo-doc-footer">
+          NANDA·NOC·NIC · Hospital Militar Dr. Joaquín Castillo Duany · Anexo 4 — Formato de Modelo Registro del Plan de Cuidados de Enfermería
+        </div>
+      </div>
     </div>
   </main>
 </div>
@@ -3584,22 +4280,29 @@ function switchTab(tab) {
   document.querySelectorAll('.tabs button').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.tab === tab);
   });
+
+  // Ocultar todos los bloques de contenido antes de mostrar el de la pestaña activa
+  guideContent.style.display = 'none';
+  detailEl.style.display = 'none';
+  emptyState.style.display = 'none';
+  document.getElementById('generalidadesContent').style.display = 'none';
+  document.getElementById('anexo4Content').style.display = 'none';
+  document.getElementById('sidebar').style.display = 'none';
+
   if (tab === 'diagnosticos') {
-    guideContent.style.display = 'none';
+    document.getElementById('sidebar').style.display = 'block';
     if (currentDiagnosticCode) {
       detailEl.style.display = 'block';
-      emptyState.style.display = 'none';
     } else {
-      detailEl.style.display = 'none';
       emptyState.style.display = 'block';
     }
-    document.getElementById('sidebar').style.display = 'block';
-  } else {
+  } else if (tab === 'guia') {
     guideContent.style.display = 'block';
-    detailEl.style.display = 'none';
-    emptyState.style.display = 'none';
-    document.getElementById('sidebar').style.display = 'none';
     document.getElementById('dataVersion').textContent = 'v3.1 (87 diagnósticos, 153 objetivos, 175 intervenciones)';
+  } else if (tab === 'generalidades') {
+    document.getElementById('generalidadesContent').style.display = 'block';
+  } else if (tab === 'anexo4') {
+    document.getElementById('anexo4Content').style.display = 'block';
   }
 }
 document.querySelectorAll('.tabs button').forEach(btn => {
@@ -3706,6 +4409,67 @@ async function downloadAllPDF() {
 
 document.getElementById('downloadVisibleBtn').addEventListener('click', downloadVisiblePDF);
 document.getElementById('downloadAllBtn').addEventListener('click', downloadAllPDF);
+
+// ================================================================
+// 5b. DESCARGA PDF DEL ANEXO 4 (negrita, buen estilo, misma estructura)
+// ================================================================
+async function downloadAnexo4PDF() {
+  const element = document.getElementById('anexo4Printable');
+  const btn = document.getElementById('downloadAnexo4Btn');
+  if (!element || !btn) return;
+
+  const originalHtml = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generando PDF...';
+
+  // Fuerza un estilo en negrita y de alto contraste, solo durante la captura,
+  // conservando intacta toda la estructura y el diseño del Anexo.
+  element.classList.add('pdf-mode');
+
+  try {
+    // Pequeña espera para que el navegador aplique los estilos antes de capturar
+    await new Promise(resolve => setTimeout(resolve, 50));
+
+    const canvas = await html2canvas(element, {
+      scale: 2,
+      backgroundColor: '#ffffff',
+      useCORS: true
+    });
+    const imgData = canvas.toDataURL('image/png');
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF('p', 'mm', 'a4');
+
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+    const margin = 8;
+    const imgWidth = pageWidth - margin * 2;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    const usableHeight = pageHeight - margin * 2;
+
+    let heightLeft = imgHeight;
+    let position = margin;
+
+    pdf.addImage(imgData, 'PNG', margin, position, imgWidth, imgHeight);
+    heightLeft -= usableHeight;
+
+    while (heightLeft > 0) {
+      position = margin - (imgHeight - heightLeft);
+      pdf.addPage();
+      pdf.addImage(imgData, 'PNG', margin, position, imgWidth, imgHeight);
+      heightLeft -= usableHeight;
+    }
+
+    pdf.save('Anexo_4_Formato_Modelo_Registro.pdf');
+  } catch (err) {
+    console.error('Error generando el PDF del Anexo 4:', err);
+    alert('Ocurrió un error al generar el PDF del Anexo 4. Inténtalo nuevamente.');
+  } finally {
+    element.classList.remove('pdf-mode');
+    btn.disabled = false;
+    btn.innerHTML = originalHtml;
+  }
+}
+document.getElementById('downloadAnexo4Btn').addEventListener('click', downloadAnexo4PDF);
 
 // ================================================================
 // 6. TEMA OSCURO / CLARO
